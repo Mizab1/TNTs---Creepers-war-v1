@@ -69,7 +69,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_snow", "Snow TNT", "snow", 120002);
       placeAndCreateFunction("give_water", "Water TNT", "water", 120003);
       placeAndCreateFunction("give_ice", "Ice TNT", "ice", 120004);
-      placeAndCreateFunction("give_arrow", "Arrow TNT", "arrow", 120005);
       placeAndCreateFunction("give_volcano", "Volcano TNT", "volcano", 120006);
       placeAndCreateFunction("give_gravity", "Gravity TNT", "gravity", 120007);
       placeAndCreateFunction("give_ghost", "Ghost TNT", "ghost", 120008);
@@ -88,6 +87,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         "meteor",
         120001
       );
+      placeAndCreateFunction("give_arrow", "Arrow TNT", "arrow", 120005);
       placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 130001);
     });
 });
@@ -284,49 +284,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             500,
             "force"
           );
-        },
-        null,
-        null
-      );
-      explosionHandler(
-        "tnt.arrow",
-        100,
-        () => {
-          particle(
-            "minecraft:crit",
-            rel(0, 0.8, 0),
-            [0.5, 0.5, 0.5],
-            0,
-            2,
-            "force"
-          );
-          particle(
-            "minecraft:item",
-            "minecraft:arrow",
-            rel(0, 1.3, 0),
-            [0, 0.3, 0],
-            0,
-            4,
-            "force"
-          );
-        },
-        () => {
-          // Square Generation
-          for (let i = -10; i <= 10; i += 1) {
-            for (let j = -10; j <= 10; j += 1) {
-              summon(
-                "minecraft:arrow",
-                rel(i, randomIntFromInterval(30, 40), j)
-              );
-              summon(
-                "minecraft:arrow",
-                rel(i, randomIntFromInterval(60, 70), j),
-                {
-                  Potion: "minecraft:poison",
-                }
-              );
-            }
-          }
         },
         null,
         null
@@ -1322,6 +1279,64 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         () => {
           raw(
             `summon fireball ~ ~100 ~ {ExplosionPower:6b,power:[0.0,-0.3,0.0],Item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:100001}}}`
+          );
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.arrow",
+        100,
+        () => {
+          particle(
+            "minecraft:crit",
+            rel(0, 0.8, 0),
+            [0.5, 0.5, 0.5],
+            0,
+            2,
+            "force"
+          );
+          particle(
+            "minecraft:item",
+            "minecraft:arrow",
+            rel(0, 1.3, 0),
+            [0, 0.3, 0],
+            0,
+            4,
+            "force"
+          );
+        },
+        () => {
+          // Square Generation
+          for (let i = -10; i <= 10; i += 1) {
+            for (let j = -10; j <= 10; j += 1) {
+              summon(
+                "minecraft:arrow",
+                rel(i, randomIntFromInterval(30, 40), j),
+                {
+                  Tags: ["tnt_arrow"],
+                }
+              );
+              summon(
+                "minecraft:arrow",
+                rel(i, randomIntFromInterval(60, 70), j),
+                {
+                  Potion: "minecraft:poison",
+                  Tags: ["tnt_arrow"],
+                }
+              );
+            }
+          }
+
+          // Kill the arrows
+          schedule.function(
+            () => {
+              kill(
+                Selector("@e", { type: "minecraft:arrow", tag: "tnt_arrow" })
+              );
+            },
+            "150t",
+            "replace"
           );
         },
         null,
