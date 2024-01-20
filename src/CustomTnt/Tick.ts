@@ -71,7 +71,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_ice", "Ice TNT", "ice", 120004);
       placeAndCreateFunction("give_volcano", "Volcano TNT", "volcano", 120006);
       placeAndCreateFunction("give_gravity", "Gravity TNT", "gravity", 120007);
-      placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
       placeAndCreateFunction(
         "give_inverted",
         "Inverted TNT",
@@ -88,6 +87,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       );
       placeAndCreateFunction("give_arrow", "Arrow TNT", "arrow", 120005);
       placeAndCreateFunction("give_ghost", "Ghost TNT", "ghost", 120008);
+      placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
       placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 130001);
     });
 });
@@ -400,43 +400,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             0,
             2000,
             "force"
-          );
-        },
-        null,
-        null
-      );
-      explosionHandler(
-        "tnt.ender",
-        100,
-        () => {
-          particle(
-            "minecraft:crimson_spore",
-            rel(0, 0.8, 0),
-            [0.5, 0.5, 0.5],
-            0,
-            2,
-            "force"
-          );
-          particle(
-            "minecraft:reverse_portal",
-            rel(0, 0.8, 0),
-            [0, 0.3, 0],
-            0.01,
-            4,
-            "force"
-          );
-        },
-        () => {
-          spreadplayers(
-            rel(0, 0),
-            5,
-            20,
-            false,
-            Selector("@e", {
-              type: "#aestd1:living_base",
-              sort: "nearest",
-              distance: [Infinity, 8],
-            })
           );
         },
         null,
@@ -1341,6 +1304,54 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         },
         null,
         null
+      );
+      explosionHandler(
+        "tnt.ender",
+        100,
+        () => {
+          particle(
+            "minecraft:crimson_spore",
+            rel(0, 0.8, 0),
+            [0.5, 0.5, 0.5],
+            0,
+            2,
+            "force"
+          );
+          particle(
+            "minecraft:reverse_portal",
+            rel(0, 0.8, 0),
+            [0, 0.3, 0],
+            0.01,
+            4,
+            "force"
+          );
+        },
+        () => {
+          spreadplayers(
+            rel(0, 0),
+            5,
+            20,
+            false,
+            Selector("@e", {
+              type: "#aestd1:living_base",
+              sort: "nearest",
+              distance: [Infinity, 10], // ! Change the particle radius also
+            })
+          );
+        },
+        null,
+        () => {
+          for (let i = 0; i < 40; i++) {
+            particle(
+              "minecraft:portal",
+              rel(Math.sin(i) * 10, 1, Math.cos(i) * 10),
+              [0, 0, 0],
+              0,
+              1,
+              "force"
+            );
+          }
+        }
       );
       explosionHandler(
         "tnt.normal",
