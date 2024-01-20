@@ -55,7 +55,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_tree", "Tree TNT", "tree", 110015);
       placeAndCreateFunction("give_wolf", "Angry Wolf TNT", "wolf", 110016);
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
-      placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
 
       // Pack 1
@@ -79,6 +78,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         "lightning",
         110006
       );
+      placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction(
         "give_meteorite",
         "Meteorite TNT",
@@ -967,31 +967,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
       explosionHandler(
-        "tnt.honey",
-        100,
-        () => {
-          raw(
-            `particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 2 force`
-          );
-          raw(
-            `particle minecraft:falling_honey ~ ~0.8 ~ 0.5 0.5 0.5 1 4 force`
-          );
-        },
-        () => {
-          raw(
-            `fill ~-5 ~-5 ~-5 ~5 ~5 ~5 minecraft:honey_block replace #aestd1:all_but_air`
-          );
-          // fill(rel(-6, -6, -6), rel(6, 6, 6), "minecraft:honey_block");
-          summon("minecraft:creeper", rel(0, 0, 0), {
-            Fuse: 0,
-            ignited: NBT.byte(1),
-            CustomName: '{"text":"TNT","italic":false}',
-          });
-        },
-        null,
-        null
-      );
-      explosionHandler(
         "tnt.creeper",
         100,
         () => {
@@ -1128,6 +1103,30 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "100t",
             "replace"
           );
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.honey",
+        100,
+        () => {
+          raw(
+            `particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 2 force`
+          );
+          raw(
+            `particle minecraft:falling_honey ~ ~0.8 ~ 0.5 0.5 0.5 1 4 force`
+          );
+        },
+        () => {
+          raw(
+            `fill ~-5 ~-5 ~-5 ~5 ~5 ~5 minecraft:honey_block replace #aestd1:all_but_air`
+          );
+          summon("minecraft:creeper", rel(0, 0, 0), {
+            Fuse: 0,
+            ignited: NBT.byte(1),
+            CustomName: '{"text":"TNT","italic":false}',
+          });
         },
         null,
         null
