@@ -5,6 +5,7 @@ import {
   Selector,
   _,
   data,
+  effect,
   execute,
   fill,
   gamerule,
@@ -89,6 +90,12 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
       placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 130001);
       placeAndCreateFunction("give_nausea_tnt", "Nausea TNT", "nausea", 130002);
+      placeAndCreateFunction(
+        "give_levitation_tnt",
+        "Levitation TNT",
+        "levitation",
+        130003
+      );
     });
 });
 
@@ -1439,6 +1446,42 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         },
         null,
         null
+      );
+      explosionHandler(
+        "tnt.levitation",
+        100,
+        () => {
+          particle(
+            "minecraft:ash",
+            rel(0, 0.8, 0),
+            [0.1, 0.5, 0.1],
+            0.1,
+            50,
+            "force"
+          );
+        },
+        () => {
+          effect.give(
+            Selector("@a", { distance: [Infinity, 10] }),
+            "minecraft:levitation",
+            3,
+            10,
+            true
+          ); // ! Change the particle radius also
+        },
+        null,
+        () => {
+          for (let i = 0; i < 40; i++) {
+            particle(
+              "minecraft:instant_effect",
+              rel(Math.sin(i) * 10, 1, Math.cos(i) * 10),
+              [0, 0, 0],
+              0,
+              1,
+              "force"
+            );
+          }
+        }
       );
     });
 });
