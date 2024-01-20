@@ -40,12 +40,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_10x", "10x TNT", "10x", 110002);
       placeAndCreateFunction("give_20x", "20x TNT", "20x", 110003);
       placeAndCreateFunction("give_house", "House TNT", "house", 110004);
-      placeAndCreateFunction(
-        "give_lightning",
-        "Lightning Strike TNT",
-        "lightning",
-        110006
-      );
       placeAndCreateFunction("give_fire", "Fire TNT", "fire", 110007);
       placeAndCreateFunction("give_nuclear", "Nuclear TNT", "nuclear", 110008);
       placeAndCreateFunction("give_warden", "Warden TNT", "warden", 110009);
@@ -79,6 +73,12 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
 
       // New TNT
       placeAndCreateFunction("give_mobs", "Mobs TNT", "animals", 110005);
+      placeAndCreateFunction(
+        "give_lightning",
+        "Lightning Strike TNT",
+        "lightning",
+        110006
+      );
       placeAndCreateFunction(
         "give_meteorite",
         "Meteorite TNT",
@@ -626,33 +626,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
       explosionHandler(
-        "tnt.lightning",
-        100,
-        () => {
-          particle("minecraft:flash", rel(0, 1, 0), [1, 1, 1], 0, 2, "force");
-        },
-        () => {
-          summon("minecraft:marker", rel(0, 0, 0), {
-            Invisible: NBT.byte(1),
-            Tags: ["lightning.marker"],
-          });
-          schedule.function(
-            MCFunction("custom_tnt/auxillary/schedule_kill", () => {
-              kill(
-                Selector("@e", {
-                  type: "minecraft:marker",
-                  tag: "lightning.marker",
-                })
-              );
-            }),
-            "300t",
-            "replace"
-          );
-        },
-        null,
-        null
-      );
-      explosionHandler(
         "tnt.fire",
         100,
         () => {
@@ -1128,6 +1101,33 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               ],
             });
           }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.lightning",
+        100,
+        () => {
+          particle("minecraft:flash", rel(0, 1, 0), [1, 1, 1], 0, 2, "force");
+        },
+        () => {
+          summon("minecraft:marker", rel(0, 0, 0), {
+            Invisible: NBT.byte(1),
+            Tags: ["lightning.marker"],
+          });
+          schedule.function(
+            MCFunction("custom_tnt/auxillary/schedule_kill", () => {
+              kill(
+                Selector("@e", {
+                  type: "minecraft:marker",
+                  tag: "lightning.marker",
+                })
+              );
+            }),
+            "100t",
+            "replace"
+          );
         },
         null,
         null

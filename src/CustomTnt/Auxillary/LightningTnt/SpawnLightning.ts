@@ -46,6 +46,6 @@ const spawnLightning = MCFunction(
       });
   },
   {
-    runEach: "10t",
+    runEach: "1t",
   }
 );
