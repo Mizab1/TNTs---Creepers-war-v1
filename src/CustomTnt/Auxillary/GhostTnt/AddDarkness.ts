@@ -17,7 +17,7 @@ export const AddDarkness = MCFunction(
         effect.give(
           Selector("@a", { distance: [Infinity, 5] }),
           "minecraft:darkness",
-          5,
+          10,
           1,
           true
         );
