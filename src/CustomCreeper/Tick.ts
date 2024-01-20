@@ -8,6 +8,7 @@ import {
   execute,
   rel,
   say,
+  summon,
   tag,
 } from "sandstone";
 import { createCustomCreeper } from "./Private/CustomCreeperComponents";
@@ -60,6 +61,28 @@ MCFunction(
           1,
           1,
           null
+        );
+        createCustomCreeper(
+          "Recursive Creeper",
+          "recursive_creeper",
+          rel(0, 0, 0),
+          3,
+          30,
+          1,
+          () => {
+            for (let i = 0; i < 6; i++) {
+              summon("minecraft:creeper", rel(Math.sin(i), 1.5, Math.cos(i)), {
+                active_effects: [
+                  {
+                    id: "minecraft:resistance",
+                    amplifier: NBT.byte(64),
+                    duration: 50,
+                    show_particles: NBT.byte(0),
+                  },
+                ],
+              });
+            }
+          }
         );
       });
   },
