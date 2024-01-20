@@ -50,17 +50,16 @@ MCFunction(
 
         // Run the creeper handler every tick and create a creeper file once
         //! This function will create a file regardless of the condition status, but it will run the handler function on only "dynamic" creeper
+
         /* Start creating custom creeper from here */
         createCustomCreeper(
           "Instant Creeper",
           "instant_creeper",
           rel(0, 0, 0),
-          5,
-          20,
+          3,
           1,
-          () => {
-            say("Hello");
-          }
+          1,
+          null
         );
       });
   },
