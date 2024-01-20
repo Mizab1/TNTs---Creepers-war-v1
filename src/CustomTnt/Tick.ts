@@ -54,7 +54,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_jerome", "Jerome TNT", "jerome", 110014);
       placeAndCreateFunction("give_tree", "Tree TNT", "tree", 110015);
       placeAndCreateFunction("give_wolf", "Angry Wolf TNT", "wolf", 110016);
-      placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
 
       // Pack 1
@@ -78,6 +77,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         "lightning",
         110006
       );
+      placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction(
         "give_meteorite",
@@ -939,34 +939,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
       explosionHandler(
-        "tnt.bees",
-        100,
-        () => {
-          raw(
-            `particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 4 force`
-          );
-          raw(
-            `particle minecraft:falling_nectar ~ ~0.8 ~ 0.3 0.3 0.3 1 20 force`
-          );
-        },
-        () => {
-          gamerule("universalAnger", true);
-          for (let i = 0; i < 20; i++) {
-            summon("minecraft:bee", rel(0, 0, 0), {
-              Motion: [
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-              ],
-              AngerTime: 19999980,
-              DeathLootTable: "minecraft:bat",
-            });
-          }
-        },
-        null,
-        null
-      );
-      explosionHandler(
         "tnt.creeper",
         100,
         () => {
@@ -1103,6 +1075,34 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "100t",
             "replace"
           );
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.bees",
+        100,
+        () => {
+          raw(
+            `particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 4 force`
+          );
+          raw(
+            `particle minecraft:falling_nectar ~ ~0.8 ~ 0.3 0.3 0.3 1 20 force`
+          );
+        },
+        () => {
+          gamerule("universalAnger", true);
+          for (let i = 0; i < 20; i++) {
+            summon("minecraft:bee", rel(0, 0, 0), {
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+              AngerTime: 19999980,
+              DeathLootTable: "minecraft:bat",
+            });
+          }
         },
         null,
         null
