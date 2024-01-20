@@ -1370,6 +1370,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           summon("minecraft:creeper", rel(0, 0, 0), {
             Fuse: 0,
             ignited: NBT.byte(1),
+            CustomName: '{"text":"TNT","italic":false}',
           });
         },
         null,
