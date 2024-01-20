@@ -88,6 +88,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_ghost", "Ghost TNT", "ghost", 120008);
       placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
       placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 130001);
+      placeAndCreateFunction("give_nausea_tnt", "Nausea TNT", "nausea", 130002);
     });
 });
 
@@ -1369,6 +1370,72 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             ignited: NBT.byte(1),
             CustomName: '{"text":"TNT","italic":false}',
           });
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.nausea",
+        100,
+        () => {
+          particle(
+            // @ts-ignore
+            "minecraft:dust_plume",
+            rel(0, 0.8, 0),
+            [0, 0, 0],
+            0.1,
+            3,
+            "force"
+          );
+        },
+        () => {
+          summon("minecraft:block_display", rel(0, 0, 0), {
+            transformation: {
+              left_rotation: [
+                NBT.float(0),
+                NBT.float(0),
+                NBT.float(0),
+                NBT.float(1),
+              ],
+              right_rotation: [
+                NBT.float(0),
+                NBT.float(0),
+                NBT.float(0),
+                NBT.float(1),
+              ],
+              translation: [NBT.float(-2.5), NBT.float(0), NBT.float(-2.5)],
+              scale: [NBT.float(5), NBT.float(5), NBT.float(5)],
+            },
+            block_state: { Name: "minecraft:yellow_stained_glass" },
+            Tags: ["nausea_block_display"],
+          });
+          schedule.function(
+            () => {
+              execute
+                .as(
+                  Selector("@e", {
+                    type: "minecraft:block_display",
+                    tag: "nausea_block_display",
+                  })
+                )
+                .at(self)
+                .run(() => {
+                  kill(self);
+                  particle(
+                    // @ts-ignore
+                    "minecraft:dust",
+                    [1, 1, 0.14],
+                    1,
+                    rel(0, 0.8, 0),
+                    [3, 3, 3],
+                    0.1,
+                    5000
+                  );
+                });
+            },
+            "5s",
+            "replace"
+          );
         },
         null,
         null
