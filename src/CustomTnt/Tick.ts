@@ -40,7 +40,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_10x", "10x TNT", "10x", 110002);
       placeAndCreateFunction("give_20x", "20x TNT", "20x", 110003);
       placeAndCreateFunction("give_house", "House TNT", "house", 110004);
-      placeAndCreateFunction("give_mobs", "Mobs TNT", "animals", 110005);
       placeAndCreateFunction(
         "give_lightning",
         "Lightning Strike TNT",
@@ -79,6 +78,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       );
 
       // New TNT
+      placeAndCreateFunction("give_mobs", "Mobs TNT", "animals", 110005);
       placeAndCreateFunction(
         "give_meteorite",
         "Meteorite TNT",
@@ -626,84 +626,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
       explosionHandler(
-        "tnt.animals",
-        100,
-        () => {
-          particle(
-            "minecraft:cloud",
-            rel(0, 1, 0),
-            [0.1, 0.5, 0.1],
-            0.1,
-            15,
-            "force"
-          );
-        },
-        () => {
-          for (let i = 0; i < 25; i++) {
-            summon("minecraft:zombie", rel(0, 0, 0), {
-              Tags: ["tnt.zombie"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-            });
-            summon("minecraft:creeper", rel(0, 0, 0), {
-              Tags: ["tnt.creeper"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-            });
-            summon("minecraft:skeleton", rel(0, 0, 0), {
-              Tags: ["tnt.skeleton"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-              HandItems: [{ id: "minecraft:bow", Count: NBT.byte(1) }, {}],
-            });
-            summon("minecraft:blaze", rel(0, 0, 0), {
-              Tags: ["tnt.blaze"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-            });
-            summon("minecraft:enderman", rel(0, 0, 0), {
-              Tags: ["tnt.enderman"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-            });
-            summon("minecraft:stray", rel(0, 0, 0), {
-              Tags: ["tnt.stray"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-              HandItems: [{ id: "minecraft:bow", Count: NBT.byte(1) }, {}],
-            });
-            summon("minecraft:husk", rel(0, 0, 0), {
-              Tags: ["tnt.husk"],
-              Motion: [
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-                Math.random().toFixed(2),
-              ],
-            });
-          }
-        },
-        null,
-        null
-      );
-      explosionHandler(
         "tnt.lightning",
         100,
         () => {
@@ -1132,6 +1054,84 @@ export const handler = MCFunction("custom_tnt/handler", () => {
       );
 
       // New TNTs
+      explosionHandler(
+        "tnt.animals",
+        100,
+        () => {
+          particle(
+            "minecraft:cloud",
+            rel(0, 1, 0),
+            [0.1, 0.5, 0.1],
+            0.1,
+            1,
+            "force"
+          );
+        },
+        () => {
+          for (let i = 0; i < 2; i++) {
+            summon("minecraft:zombie", rel(0, 0, 0), {
+              Tags: ["tnt.zombie"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+            });
+            summon("minecraft:creeper", rel(0, 0, 0), {
+              Tags: ["tnt.creeper"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+            });
+            summon("minecraft:skeleton", rel(0, 0, 0), {
+              Tags: ["tnt.skeleton"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+              HandItems: [{ id: "minecraft:bow", Count: NBT.byte(1) }, {}],
+            });
+            summon("minecraft:blaze", rel(0, 0, 0), {
+              Tags: ["tnt.blaze"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+            });
+            summon("minecraft:enderman", rel(0, 0, 0), {
+              Tags: ["tnt.enderman"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+            });
+            summon("minecraft:stray", rel(0, 0, 0), {
+              Tags: ["tnt.stray"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+              HandItems: [{ id: "minecraft:bow", Count: NBT.byte(1) }, {}],
+            });
+            summon("minecraft:husk", rel(0, 0, 0), {
+              Tags: ["tnt.husk"],
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+            });
+          }
+        },
+        null,
+        null
+      );
       explosionHandler(
         "tnt.meteor",
         100,
