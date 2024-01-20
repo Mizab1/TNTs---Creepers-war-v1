@@ -85,6 +85,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
+      placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 110020);
     });
 });
 
@@ -1317,6 +1318,30 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               powered: NBT.byte(1),
             });
           }
+        },
+        null,
+        null
+      );
+
+      // New TNTs
+      explosionHandler(
+        "tnt.normal",
+        100,
+        () => {
+          particle(
+            "minecraft:smoke",
+            rel(0, 0.8, 0),
+            [0.1, 0.3, 0.1],
+            0.1,
+            50,
+            "force"
+          );
+        },
+        () => {
+          summon("minecraft:creeper", rel(0, 0, 0), {
+            Fuse: 0,
+            ignited: NBT.byte(1),
+          });
         },
         null,
         null
