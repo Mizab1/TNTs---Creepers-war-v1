@@ -35,27 +35,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
     .at(self)
     .run(() => {
       // Creates the "Give TNT" function and does the processing if Custom TNT is placed
-      placeAndCreateFunction(
-        "give_meteorite",
-        "Meteorite TNT",
-        "meteor",
-        120001
-      );
-      placeAndCreateFunction("give_snow", "Snow TNT", "snow", 120002);
-      placeAndCreateFunction("give_water", "Water TNT", "water", 120003);
-      placeAndCreateFunction("give_ice", "Ice TNT", "ice", 120004);
-      placeAndCreateFunction("give_arrow", "Arrow TNT", "arrow", 120005);
-      placeAndCreateFunction("give_volcano", "Volcano TNT", "volcano", 120006);
-      placeAndCreateFunction("give_gravity", "Gravity TNT", "gravity", 120007);
-      placeAndCreateFunction("give_ghost", "Ghost TNT", "ghost", 120008);
-      placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
-      placeAndCreateFunction(
-        "give_inverted",
-        "Inverted TNT",
-        "inverted",
-        120010
-      );
-
       // CustomTNT 0 Pack Merged
       placeAndCreateFunction("give_5x", "5x TNT", "5x", 110001);
       placeAndCreateFunction("give_10x", "10x TNT", "10x", 110002);
@@ -85,7 +64,32 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
-      placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 110020);
+
+      // Pack 1
+
+      placeAndCreateFunction("give_snow", "Snow TNT", "snow", 120002);
+      placeAndCreateFunction("give_water", "Water TNT", "water", 120003);
+      placeAndCreateFunction("give_ice", "Ice TNT", "ice", 120004);
+      placeAndCreateFunction("give_arrow", "Arrow TNT", "arrow", 120005);
+      placeAndCreateFunction("give_volcano", "Volcano TNT", "volcano", 120006);
+      placeAndCreateFunction("give_gravity", "Gravity TNT", "gravity", 120007);
+      placeAndCreateFunction("give_ghost", "Ghost TNT", "ghost", 120008);
+      placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
+      placeAndCreateFunction(
+        "give_inverted",
+        "Inverted TNT",
+        "inverted",
+        120010
+      );
+
+      // New TNT
+      placeAndCreateFunction(
+        "give_meteorite",
+        "Meteorite TNT",
+        "meteor",
+        120001
+      );
+      placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 130001);
     });
 });
 
@@ -95,38 +99,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
     .at(self)
     .run(() => {
       // Cycle through all the available TNT and pick the correct handler
-      explosionHandler(
-        "tnt.meteor",
-        100,
-        () => {
-          for (let i = 0; i < 40; i++) {
-            particle(
-              "minecraft:falling_dust",
-              "minecraft:red_concrete",
-              rel(Math.sin(i) * 2, 1, Math.cos(i) * 2),
-              [0, 0, 0],
-              0,
-              1,
-              "force"
-            );
-          }
-          particle(
-            "minecraft:ash",
-            rel(0, 0.8, 0),
-            [0.1, 0.5, 0.1],
-            0.1,
-            50,
-            "force"
-          );
-        },
-        () => {
-          raw(
-            `summon fireball ~ ~100 ~ {ExplosionPower:6b,power:[0.0,-0.3,0.0],Item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:100001}}}`
-          );
-        },
-        null,
-        null
-      );
       explosionHandler(
         "tnt.snow",
         100,
@@ -1325,6 +1297,38 @@ export const handler = MCFunction("custom_tnt/handler", () => {
 
       // New TNTs
       explosionHandler(
+        "tnt.meteor",
+        100,
+        () => {
+          for (let i = 0; i < 40; i++) {
+            particle(
+              "minecraft:falling_dust",
+              "minecraft:red_concrete",
+              rel(Math.sin(i) * 2, 1, Math.cos(i) * 2),
+              [0, 0, 0],
+              0,
+              1,
+              "force"
+            );
+          }
+          particle(
+            "minecraft:ash",
+            rel(0, 0.8, 0),
+            [0.1, 0.5, 0.1],
+            0.1,
+            50,
+            "force"
+          );
+        },
+        () => {
+          raw(
+            `summon fireball ~ ~100 ~ {ExplosionPower:6b,power:[0.0,-0.3,0.0],Item:{id:"minecraft:wooden_hoe",Count:1b,tag:{CustomModelData:100001}}}`
+          );
+        },
+        null,
+        null
+      );
+      explosionHandler(
         "tnt.normal",
         100,
         () => {
@@ -1333,7 +1337,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             rel(0, 0.8, 0),
             [0.1, 0.3, 0.1],
             0.1,
-            50,
+            2,
             "force"
           );
         },
