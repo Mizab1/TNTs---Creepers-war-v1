@@ -66,7 +66,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
 
       // Pack 1
-
       placeAndCreateFunction("give_snow", "Snow TNT", "snow", 120002);
       placeAndCreateFunction("give_water", "Water TNT", "water", 120003);
       placeAndCreateFunction("give_ice", "Ice TNT", "ice", 120004);
@@ -1300,7 +1299,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.meteor",
         100,
         () => {
-          for (let i = 0; i < 40; i++) {
+          for (let i = 0; i < 20; i++) {
             particle(
               "minecraft:falling_dust",
               "minecraft:red_concrete",
