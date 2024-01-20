@@ -54,8 +54,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_jerome", "Jerome TNT", "jerome", 110014);
       placeAndCreateFunction("give_tree", "Tree TNT", "tree", 110015);
       placeAndCreateFunction("give_wolf", "Angry Wolf TNT", "wolf", 110016);
-      placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
-
       // Pack 1
       placeAndCreateFunction("give_snow", "Snow TNT", "snow", 120002);
       placeAndCreateFunction("give_water", "Water TNT", "water", 120003);
@@ -79,6 +77,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       );
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
+      placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
       placeAndCreateFunction(
         "give_meteorite",
         "Meteorite TNT",
@@ -482,7 +481,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null,
         null
       );
-
       // CustomTNT 0 Pack Merged
       explosionHandler(
         "tnt.5x",
@@ -938,40 +936,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null,
         null
       );
-      explosionHandler(
-        "tnt.creeper",
-        100,
-        () => {
-          raw(
-            `particle minecraft:ambient_entity_effect ~ ~0.8 ~ 0.1 0.1 0.1 1 10 force`
-          );
-        },
-        () => {
-          for (let i = 0; i < 20; i++) {
-            summon("minecraft:creeper", rel(0, 0, 0), {
-              Motion: [
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-              ],
-              DeathLootTable: "minecraft:bat",
-            });
-          }
-          for (let i = 0; i < 5; i++) {
-            summon("minecraft:creeper", rel(0, 0, 0), {
-              Motion: [
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-              ],
-              DeathLootTable: "minecraft:bat",
-              powered: NBT.byte(1),
-            });
-          }
-        },
-        null,
-        null
-      );
 
       // New TNTs
       explosionHandler(
@@ -1127,6 +1091,40 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             ignited: NBT.byte(1),
             CustomName: '{"text":"TNT","italic":false}',
           });
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.creeper",
+        100,
+        () => {
+          raw(
+            `particle minecraft:ambient_entity_effect ~ ~0.8 ~ 0.1 0.1 0.1 1 10 force`
+          );
+        },
+        () => {
+          for (let i = 0; i < 5; i++) {
+            summon("minecraft:creeper", rel(0, 0, 0), {
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+              DeathLootTable: "minecraft:bat",
+            });
+          }
+          for (let i = 0; i < 2; i++) {
+            summon("minecraft:creeper", rel(0, 0, 0), {
+              Motion: [
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+                +lodash.random(0.2, 0.9, true).toFixed(1),
+              ],
+              DeathLootTable: "minecraft:bat",
+              powered: NBT.byte(1),
+            });
+          }
         },
         null,
         null
