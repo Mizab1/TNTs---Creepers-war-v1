@@ -1,0 +1,17 @@
+{
+  "launch": {
+    "sounds": [
+      "gravity_guns/launch"
+    ]
+  },
+  "pickup": {
+    "sounds": [
+      "gravity_guns/pickup"
+    ]
+  },
+  "drop": {
+    "sounds": [
+      "gravity_guns/drop"
+    ]
+  }
+}

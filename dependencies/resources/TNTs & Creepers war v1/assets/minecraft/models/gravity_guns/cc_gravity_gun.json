@@ -1,0 +1,7 @@
+{
+    "parent": "gravity_guns/gravity_gun",
+    "textures": {
+        "0": "gravity_guns/cc_gravity_gun",
+        "particle": "gravity_guns/cc_gravity_gun"
+    }
+}

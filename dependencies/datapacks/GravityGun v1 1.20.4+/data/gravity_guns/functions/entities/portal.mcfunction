@@ -1,0 +1,2 @@
+execute as @e[tag=gravity_base,sort=nearest,limit=1] run tag @s add gravity_portal_pass
+execute at @e[tag=portal_gun_portal,sort=nearest,limit=1] run tp @e[tag=gravity_portal_pass,sort=nearest,limit=1] ~ 300 ~

@@ -1,0 +1,13 @@
+{
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gravity_guns:gravity_gun"
+      }
+    }
+  },
+  "rewards": {
+    "function": "gravity_guns:craft/gravity_gun"
+  }
+}

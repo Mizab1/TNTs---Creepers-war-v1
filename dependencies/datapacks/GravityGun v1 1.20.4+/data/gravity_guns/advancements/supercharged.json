@@ -1,0 +1,13 @@
+{
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "gravity_guns:supercharged"
+      }
+    }
+  },
+  "rewards": {
+    "function": "gravity_guns:craft/supercharged"
+  }
+}

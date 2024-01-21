@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:item_frame",
+    "minecraft:item",
+    "minecraft:marker",
+    "minecraft:experience_orb",
+    "minecraft:arrow",
+    "minecraft:boat",
+    "minecraft:minecart",
+    "minecraft:command_block_minecart",
+    "minecraft:hopper_minecart",
+    "minecraft:tnt_minecart",
+    "minecraft:chest_minecart"
+  ]
+}
