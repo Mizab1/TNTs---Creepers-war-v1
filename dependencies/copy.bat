@@ -5,7 +5,7 @@
 set "WorldName=Testing 4"
 
 
-color 02
+color e
 echo World Name: %WorldName%
 pause
 color 07
