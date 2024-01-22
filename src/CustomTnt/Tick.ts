@@ -96,6 +96,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         "levitation",
         130003
       );
+      placeAndCreateFunction("give_wither_tnt", "Wither TNT", "wither", 130004);
     });
 });
 
@@ -1482,6 +1483,69 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             );
           }
         }
+      );
+      explosionHandler(
+        "tnt.wither",
+        100,
+        () => {
+          // particle(
+          //   "minecraft:block",
+          //   "minecraft:black_concrete",
+          //   rel(0, 0.8, 0),
+          //   [0.5, 0.5, 0.5],
+          //   0,
+          //   2,
+          //   "force"
+          // );
+          particle(
+            // @ts-ignore
+            "minecraft:dust",
+            [0, 0, 0],
+            1,
+            rel(0, 0.8, 0),
+            [0, 0.2, 0],
+            1,
+            15
+          );
+        },
+        () => {
+          summon("minecraft:wither", rel(0, 0, 0), {
+            Tags: ["tnt_wither"],
+            DeathLootTable: "minecraft:bat",
+          });
+
+          // Kill the wither after some time
+          schedule.function(
+            () => {
+              execute
+                .as(
+                  Selector("@e", {
+                    type: "minecraft:wither",
+                    tag: "tnt_wither",
+                  })
+                )
+                .at(self)
+                .run(() => {
+                  kill(self);
+                  particle(
+                    // @ts-ignore
+                    "minecraft:dust",
+                    [0, 0, 0],
+                    1,
+                    rel(0, 0.8, 0),
+                    [1, 1, 1],
+                    0.1,
+                    100
+                  );
+                  particle("minecraft:poof", rel(0, 1, 0), [0, 0, 0], 0.1, 60);
+                });
+            },
+            "10s",
+            "replace"
+          );
+        },
+        null,
+        null
       );
     });
 });
