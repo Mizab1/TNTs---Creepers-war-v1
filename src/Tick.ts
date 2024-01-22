@@ -46,6 +46,12 @@ const tick = MCFunction(
         nbt: { Item: { id: "minecraft:tnt", Count: NBT.byte(1) } },
       })
     );
+    kill(
+      Selector("@e", {
+        type: "minecraft:item",
+        nbt: { Item: { id: "minecraft:nether_star", Count: NBT.byte(1) } },
+      })
+    );
   },
   { runEachTick: true }
 );
