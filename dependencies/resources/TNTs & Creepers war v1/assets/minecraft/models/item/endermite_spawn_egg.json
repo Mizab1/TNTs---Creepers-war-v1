@@ -39,7 +39,8 @@
         {"predicate": {"custom_model_data":130002}, "model":"item/tnt/nausea_tnt"},
         {"predicate": {"custom_model_data":130003}, "model":"item/tnt/levitation_tnt"},
         {"predicate": {"custom_model_data":130004}, "model":"item/tnt/wither_tnt"},
-        {"predicate": {"custom_model_data":130005}, "model":"item/tnt/wwz_tnt"}
+        {"predicate": {"custom_model_data":130005}, "model":"item/tnt/wwz_tnt"},
+        {"predicate": {"custom_model_data":130006}, "model":"item/tnt/missile_tnt"}
     ]
 }
 
