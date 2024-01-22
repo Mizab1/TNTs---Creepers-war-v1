@@ -933,14 +933,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         },
         () => {
           for (let i = 0; i < 2; i++) {
-            summon("minecraft:zombie", rel(0, 0, 0), {
-              Tags: ["tnt.zombie"],
-              Motion: [
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-                +lodash.random(0.2, 0.9, true).toFixed(1),
-              ],
-            });
             summon("minecraft:creeper", rel(0, 0, 0), {
               Tags: ["tnt.creeper"],
               Motion: [
