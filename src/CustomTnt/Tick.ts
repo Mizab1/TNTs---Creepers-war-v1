@@ -3,11 +3,13 @@ import {
   MCFunctionInstance,
   NBT,
   Selector,
+  Variable,
   _,
   data,
   effect,
   execute,
   fill,
+  functionCmd,
   gamerule,
   kill,
   particle,
@@ -98,6 +100,12 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       );
       placeAndCreateFunction("give_wither_tnt", "Wither TNT", "wither", 130004);
       placeAndCreateFunction("give_wwz_tnt", "World War Z TNT", "wwz", 130005);
+      placeAndCreateFunction(
+        "give_missile_tnt",
+        "Missile TNT",
+        "missile",
+        130006
+      );
     });
 });
 
@@ -1605,6 +1613,79 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               ],
             });
           }
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.missile",
+        100,
+        () => {
+          particle(
+            // @ts-ignore
+            "minecraft:block",
+            "minecraft:red_concrete",
+            rel(0, 0.8, 0),
+            [0.1, 0.1, 0.1],
+            0.1,
+            6,
+            "force"
+          );
+          particle(
+            // @ts-ignore
+            "minecraft:block",
+            "minecraft:white_concrete",
+            rel(0, 0.8, 0),
+            [0.1, 0.1, 0.1],
+            0.1,
+            8,
+            "force"
+          );
+        },
+        () => {
+          // Spawn a marker or anchor
+          summon("minecraft:armor_stand", rel(0, 0, 0), {
+            Tags: ["tnt_missile_anchor"],
+            Marker: NBT.byte(1),
+            Invisible: NBT.byte(1),
+          });
+
+          const missileAnchor = Selector("@e", {
+            type: "minecraft:armor_stand",
+            tag: "tnt_missile_anchor",
+          });
+          // Spawn few missile at different time
+          functionCmd("missile:spawn_missiles");
+
+          let missileCount = Variable(1);
+          let maxMissileCount = 5;
+
+          // Recursively call the spawn missile function with base-case
+          const spawnMissileFunction = MCFunction(
+            "misc/missile_tnt/spawn_missile",
+            () => {
+              schedule.function(
+                () => {
+                  execute
+                    .as(missileAnchor)
+                    .at(self)
+                    .run(() => {
+                      functionCmd("missile:spawn_missiles");
+                      _.if(missileCount.lessThan(5), () => {
+                        missileCount.add(1);
+                        spawnMissileFunction();
+                      });
+                      _.if(missileCount.equalTo(maxMissileCount), () => {
+                        kill(self);
+                      });
+                    });
+                },
+                "2s",
+                "append"
+              );
+            }
+          );
+          spawnMissileFunction();
         },
         null,
         null
