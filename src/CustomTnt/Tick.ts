@@ -43,7 +43,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_house", "House TNT", "house", 110004);
       placeAndCreateFunction("give_fire", "Fire TNT", "fire", 110007);
       placeAndCreateFunction("give_nuclear", "Nuclear TNT", "nuclear", 110008);
-      placeAndCreateFunction("give_warden", "Warden TNT", "warden", 110009);
       placeAndCreateFunction("give_big", "Big TNT", "big", 110010);
       placeAndCreateFunction("give_small", "Small TNT", "small", 110011);
       placeAndCreateFunction(
@@ -76,6 +75,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         "lightning",
         110006
       );
+      placeAndCreateFunction("give_warden", "Warden TNT", "warden", 110009);
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
@@ -690,36 +690,6 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         null
       );
       explosionHandler(
-        "tnt.warden",
-        100,
-        () => {
-          raw(
-            `particle falling_dust black_concrete ~ ~0.8 ~ 0.5 0.5 0.5 1 10 normal`
-          );
-          particle(
-            "minecraft:smoke",
-            rel(0, 0.8, 0),
-            [0.2, 0.2, 0.2],
-            0.1,
-            20,
-            "force"
-          );
-          raw(`particle sonic_boom ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
-        },
-        () => {
-          summon("minecraft:warden", rel(0, 0, 0), {
-            Brain: {
-              memories: {
-                '"minecraft:dig_cooldown"': { ttl: NBT.long(1200), value: {} },
-                '"minecraft:is_emerging"': { ttl: NBT.long(134), value: {} },
-              },
-            },
-          });
-        },
-        null,
-        null
-      );
-      explosionHandler(
         "tnt.big",
         100,
         () => {
@@ -1047,6 +1017,36 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "100t",
             "replace"
           );
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.warden",
+        100,
+        () => {
+          raw(
+            `particle falling_dust black_concrete ~ ~0.8 ~ 0.5 0.5 0.5 1 2 normal`
+          );
+          particle(
+            "minecraft:smoke",
+            rel(0, 0.8, 0),
+            [0.2, 0.2, 0.2],
+            0.1,
+            5,
+            "force"
+          );
+          // raw(`particle sonic_boom ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
+        },
+        () => {
+          summon("minecraft:warden", rel(0, 0, 0), {
+            Brain: {
+              memories: {
+                '"minecraft:dig_cooldown"': { ttl: NBT.long(1200), value: {} },
+                '"minecraft:is_emerging"': { ttl: NBT.long(134), value: {} },
+              },
+            },
+          });
         },
         null,
         null
