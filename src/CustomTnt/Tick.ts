@@ -1655,7 +1655,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             tag: "tnt_missile_anchor",
           });
           // Spawn few missile at different time
-          functionCmd("missile:spawn_missiles");
+          functionCmd("missile:spawn_missile");
 
           let missileCount = Variable(1);
           let maxMissileCount = 5;
@@ -1670,7 +1670,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
                     .as(missileAnchor)
                     .at(self)
                     .run(() => {
-                      functionCmd("missile:spawn_missiles");
+                      functionCmd("missile:spawn_missile");
                       _.if(missileCount.lessThan(5), () => {
                         missileCount.add(1);
                         spawnMissileFunction();
