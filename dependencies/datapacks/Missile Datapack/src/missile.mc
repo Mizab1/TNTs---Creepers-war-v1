@@ -1,7 +1,11 @@
+function load{
+    scoreboard objectives add missile_timer dummy
+}
+
 function tick{
     execute unless entity @e[type=armor_stand,tag=missile] run stopsound @a master item.trident.thunder
     execute as @e[type=armor_stand,tag=missile,tag=!lockon] at @s run tp @s ^ ^ ^0.25 ~ ~
-    execute as @e[type=minecraft:armor_stand,tag=missile] at @s anchored eyes run particle minecraft:flame ^ ^ ^-2 0.05 0.05 0.05 0.01 30
+    execute as @e[type=minecraft:armor_stand,tag=missile] at @s anchored eyes run particle minecraft:flame ^ ^ ^-2 0.05 0.05 0.05 0.01 30 force
     execute as @e[type=armor_stand,tag=missile] at @s run{
         execute if entity @a[distance=..1] run{
             summon creeper ~ ~ ~ {ExplosionRadius:-1b,Fuse:1,ignited:1b,Tags:["missile_creeper"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration:4000,ShowParticles:0b}]}
@@ -27,7 +31,7 @@ function tick{
 # 
 # Must be run AT the location where the missile must spawn
 ##########################################################
-function spawn_missiles{
+function spawn_missile{
     # Play sounds at the player
     execute at @a run{
         playsound item.trident.thunder master @a ~ ~ ~ 0.25 2
