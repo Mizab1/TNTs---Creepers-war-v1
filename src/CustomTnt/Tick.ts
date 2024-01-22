@@ -42,7 +42,6 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       placeAndCreateFunction("give_20x", "20x TNT", "20x", 110003);
       placeAndCreateFunction("give_house", "House TNT", "house", 110004);
       placeAndCreateFunction("give_fire", "Fire TNT", "fire", 110007);
-      placeAndCreateFunction("give_nuclear", "Nuclear TNT", "nuclear", 110008);
       placeAndCreateFunction("give_big", "Big TNT", "big", 110010);
       placeAndCreateFunction("give_small", "Small TNT", "small", 110011);
       placeAndCreateFunction(
@@ -75,6 +74,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         "lightning",
         110006
       );
+      placeAndCreateFunction("give_nuclear", "Nuclear TNT", "nuclear", 110008);
       placeAndCreateFunction("give_warden", "Warden TNT", "warden", 110009);
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
@@ -1018,6 +1018,42 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "100t",
             "replace"
           );
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.nuclear",
+        100,
+        () => {
+          particle(
+            "minecraft:crimson_spore",
+            rel(0, 0.8, 0),
+            [0, 0, 0],
+            0,
+            20,
+            "force"
+          );
+          particle(
+            "minecraft:soul_fire_flame",
+            rel(0, 0.8, 0),
+            [0, 0, 0],
+            0.1,
+            5,
+            "force"
+          );
+          raw(`particle angry_villager ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
+        },
+        () => {
+          for (let i = -3; i <= 3; i++) {
+            for (let j = -3; j <= 3; j++) {
+              raw(
+                `summon fireball ~${i * 10} ~-0.8 ~${
+                  j * 10
+                } {ExplosionPower:100b,power:[0.0,-1.0,0.0], CustomName: '{"text":"TNT","italic":false}',}`
+              );
+            }
+          }
         },
         null,
         null
