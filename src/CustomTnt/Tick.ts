@@ -97,6 +97,7 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
         130003
       );
       placeAndCreateFunction("give_wither_tnt", "Wither TNT", "wither", 130004);
+      placeAndCreateFunction("give_wwz_tnt", "World War Z TNT", "wwz", 130005);
     });
 });
 
@@ -1579,6 +1580,39 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             "10s",
             "replace"
           );
+        },
+        null,
+        null
+      );
+      explosionHandler(
+        "tnt.wwz",
+        100,
+        () => {
+          particle(
+            // @ts-ignore
+            "minecraft:item",
+            "rotten_flesh",
+            rel(0, 0.8, 0),
+            [0, 0, 0],
+            0.1,
+            10,
+            "force"
+          );
+        },
+        () => {
+          for (let i = 0; i < 4; i++) {
+            summon("minecraft:zombie", rel(0, 0, 0), {
+              DeathLootTable: "minecraft:bat",
+              Tags: ["tnt_mutant_zombie"],
+              Health: NBT.float(30),
+              Attributes: [
+                { Name: "generic.max_health", Base: 30 },
+                { Name: "generic.knockback_resistance", Base: 0.6 },
+                { Name: "generic.movement_speed", Base: 0.2 },
+                { Name: "generic.attack_damage", Base: 4 },
+              ],
+            });
+          }
         },
         null,
         null
