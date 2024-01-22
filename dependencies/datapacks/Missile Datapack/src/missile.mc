@@ -22,6 +22,11 @@ function tick{
     execute as @e[type=armor_stand,tag=missile,tag=lockon] at @s facing entity @a feet run tp @s ^ ^ ^0.45 ~ ~
 }
 
+##########################################################
+# Used to spawn the missile
+# 
+# Must be run AT the location where the missile must spawn
+##########################################################
 function spawn_missiles{
     # Play sounds at the player
     execute at @a run{
