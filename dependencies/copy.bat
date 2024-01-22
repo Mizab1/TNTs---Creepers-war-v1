@@ -14,6 +14,6 @@ color 07
 @REM Set path
 set "DestDirectoryDatapacks=%AppData%\.minecraft\saves\%WorldName%\datapacks"
 set "DestDirectoryResources=%AppData%\.minecraft\resourcepacks"
-xcopy "datapacks\*" "%DestDirectoryDatapacks%\" /s /e /y
-xcopy "resources\*" "%DestDirectoryResources%\" /s /e /y
+xcopy "datapacks\*" "%DestDirectoryDatapacks%\" /s /e /y /v
+xcopy "resources\*" "%DestDirectoryResources%\" /s /e /y /v
 

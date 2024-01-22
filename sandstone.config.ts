@@ -12,37 +12,37 @@ export default {
   onConflict: {
     default: "warn",
   },
-  scripts: {
-    // afterAll: () => {
-    //   // @ts-ignore
-    //   let worldName = this.default.saveOptions.world;
-    //   if (worldName) {
-    //     let srcDirectoryDatapacks = `dependencies\\datapacks\\*`;
-    //     let destDirectoryDatapacks = `%AppData%\\.minecraft\\saves\\${worldName}\\datapacks\\`;
-    //     let srcDirectoryResources = `dependencies\\resources\\*`;
-    //     let destDirectoryResources = `%AppData%\\.minecraft\\resourcepacks`;
-    //     try {
-    //       execSync(
-    //         `xcopy "${srcDirectoryDatapacks}" "${destDirectoryDatapacks}" /s /e /y`,
-    //         { stdio: "inherit" }
-    //       );
-    //       execSync(
-    //         `xcopy "${srcDirectoryResources}" "${destDirectoryResources}" /s /e /y`,
-    //         { stdio: "inherit" }
-    //       );
-    //       console.log(`Copied: Datapacks to ${destDirectoryDatapacks}`);
-    //       console.log(`Copied: Datapacks to ${destDirectoryResources}`);
-    //     } catch (error) {
-    //       console.error(
-    //         `Error copying ${srcDirectoryDatapacks}: ${error.message}`
-    //       );
-    //       console.error(
-    //         `Error copying ${srcDirectoryResources}: ${error.message}`
-    //       );
-    //     }
-    //   } else {
-    //     console.error("saveOption is set to path and not world");
-    //   }
-    // },
-  },
+  // scripts: {
+  //   afterAll: () => {
+  //     // @ts-ignore
+  //     let worldName = this.default.saveOptions.world;
+  //     if (worldName) {
+  //       let srcDirectoryDatapacks = `dependencies\\datapacks\\*`;
+  //       let destDirectoryDatapacks = `%AppData%\\.minecraft\\saves\\${worldName}\\datapacks\\`;
+  //       let srcDirectoryResources = `dependencies\\resources\\*`;
+  //       let destDirectoryResources = `%AppData%\\.minecraft\\resourcepacks`;
+  //       try {
+  //         execSync(
+  //           `xcopy "${srcDirectoryDatapacks}" "${destDirectoryDatapacks}" /s /e /y /v`,
+  //           { stdio: "inherit" }
+  //         );
+  //         execSync(
+  //           `xcopy "${srcDirectoryResources}" "${destDirectoryResources}" /s /e /y /v`,
+  //           { stdio: "inherit" }
+  //         );
+  //         console.log(`Copied: Datapacks to ${destDirectoryDatapacks}`);
+  //         console.log(`Copied: Datapacks to ${destDirectoryResources}`);
+  //       } catch (error) {
+  //         console.error(
+  //           `Error copying ${srcDirectoryDatapacks}: ${error.message}`
+  //         );
+  //         console.error(
+  //           `Error copying ${srcDirectoryResources}: ${error.message}`
+  //         );
+  //       }
+  //     } else {
+  //       console.error("saveOption is set to path and not world");
+  //     }
+  //   },
+  // },
 } as SandstoneConfig;
