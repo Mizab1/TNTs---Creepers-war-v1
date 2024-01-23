@@ -67,6 +67,7 @@ const createGiveFunction = (
     // ! Switch between give and summon commands
     if (isItem) {
       summon("minecraft:item", rel(0, 0, 0), {
+        Tags: ["custom_tnt_item"],
         Item: {
           id: "minecraft:endermite_spawn_egg",
           Count: NBT.byte(1),
