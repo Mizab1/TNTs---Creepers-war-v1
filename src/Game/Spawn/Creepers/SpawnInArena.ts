@@ -42,12 +42,12 @@ const spawnClock = MCFunction(
         listOfLocations.forEach((location, j) => {
           execute.if(randCreeperScore.matches(i)).run(() => {
             execute.if(randLocationScore.matches(j)).run(() => {
-              // say("custom_creeper/spawn/" + creeper + " AT " + location);
-              execute
-                .positioned(location)
-                .run.functionCmd(
-                  `tnts_and_creepers_war:custom_creeper/spawn/${creeper}`
-                );
+              say("custom_creeper/spawn/" + creeper + " AT " + location);
+              // execute
+              //   .positioned(location)
+              //   .run.functionCmd(
+              //     `tnts_and_creepers_war:custom_creeper/spawn/${creeper}`
+              //   );
             });
           });
         });
