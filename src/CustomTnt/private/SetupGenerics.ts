@@ -64,7 +64,7 @@ const createGiveFunction = (
 ) => {
   MCFunction("give_tnt/" + nameOfTheGiveFunction, () => {
     const isItem: boolean = true;
-
+    // ! Switch between give and summon commands
     if (isItem) {
       summon("minecraft:item", rel(0, 0, 0), {
         Item: {
