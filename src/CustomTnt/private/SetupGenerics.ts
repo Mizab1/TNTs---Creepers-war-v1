@@ -63,33 +63,58 @@ const createGiveFunction = (
   customModelData: number
 ) => {
   MCFunction("give_tnt/" + nameOfTheGiveFunction, () => {
-    give(
-      self,
-      i("minecraft:endermite_spawn_egg", {
-        display: {
-          Name: `{"text":"${nameOfTheTnt}","color":"#FF0808","italic":false}`,
-        },
-        CustomModelData: customModelData,
-        EntityTag: {
-          Silent: NBT.byte(1),
-          NoAI: NBT.byte(1),
-          Tags: [`${tag}`, "tnt.endermite"],
-          ActiveEffects: [
-            {
-              Id: NBT.byte(14),
-              Amplifier: NBT.byte(1),
-              Duration: 999999,
-              ShowParticles: NBT.byte(0),
+    const isItem: boolean = true;
+
+    if (isItem) {
+      summon("minecraft:item", rel(0, 0, 0), {
+        Item: {
+          id: "minecraft:endermite_spawn_egg",
+          Count: NBT.byte(1),
+          tag: {
+            display: {
+              Name: `{"text":"${nameOfTheTnt}","color":"#FF0808","italic":false}`,
             },
-          ],
+            CustomModelData: customModelData,
+            EntityTag: {
+              Silent: NBT.byte(1),
+              NoAI: NBT.byte(1),
+              Tags: [`${tag}`, "tnt.endermite"],
+              ActiveEffects: [
+                {
+                  Id: NBT.byte(14),
+                  Amplifier: NBT.byte(1),
+                  Duration: 999999,
+                  ShowParticles: NBT.byte(0),
+                },
+              ],
+            },
+          },
         },
-      })
-    );
-    // give(
-    //   self,
-    //   "minecraft:endermite_spawn_egg" +
-    //     `{display:{Name:'{"text":"${nameOfTheTnt}","color":"#FF0808","italic":false}'},CustomModelData: ${customModelData},EntityTag:{Silent:1b,NoAI:1b, Tags:["${tag}","tnt.endermite"],ActiveEffects:[{Id:14b,Amplifier:1b,Duration: 999999,ShowParticles: 0b}]}}`
-    // );
+      });
+    } else {
+      give(
+        self,
+        i("minecraft:endermite_spawn_egg", {
+          display: {
+            Name: `{"text":"${nameOfTheTnt}","color":"#FF0808","italic":false}`,
+          },
+          CustomModelData: customModelData,
+          EntityTag: {
+            Silent: NBT.byte(1),
+            NoAI: NBT.byte(1),
+            Tags: [`${tag}`, "tnt.endermite"],
+            ActiveEffects: [
+              {
+                Id: NBT.byte(14),
+                Amplifier: NBT.byte(1),
+                Duration: 999999,
+                ShowParticles: NBT.byte(0),
+              },
+            ],
+          },
+        })
+      );
+    }
   });
 };
 
