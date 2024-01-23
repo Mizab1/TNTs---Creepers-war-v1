@@ -1,34 +1,27 @@
 import { MCFunction, MCFunctionInstance, raw } from "sandstone";
 
 const GiveAll: MCFunctionInstance = MCFunction("custom_tnt/give_all", () => {
-  raw(`function custom_tnt_3:give_tnt/give_snow`);
-  raw(`function custom_tnt_3:give_tnt/give_water`);
-  raw(`function custom_tnt_3:give_tnt/give_ice`);
-  raw(`function custom_tnt_3:give_tnt/give_arrow`);
-  raw(`function custom_tnt_3:give_tnt/give_volcano`);
-  raw(`function custom_tnt_3:give_tnt/give_gravity`);
-  raw(`function custom_tnt_3:give_tnt/give_ghost`);
-  raw(`function custom_tnt_3:give_tnt/give_ender`);
-  raw(`function custom_tnt_3:give_tnt/give_inverted`);
-  raw(`function custom_tnt_3:give_tnt/give_5x`);
-  raw(`function custom_tnt_3:give_tnt/give_10x`);
-  raw(`function custom_tnt_3:give_tnt/give_20x`);
-  raw(`function custom_tnt_3:give_tnt/give_house`);
-  raw(`function custom_tnt_3:give_tnt/give_mobs`);
-  raw(`function custom_tnt_3:give_tnt/give_lightning`);
-  raw(`function custom_tnt_3:give_tnt/give_fire`);
-  raw(`function custom_tnt_3:give_tnt/give_nuclear`);
-  raw(`function custom_tnt_3:give_tnt/give_warden`);
-  raw(`function custom_tnt_3:give_tnt/give_big`);
-  raw(`function custom_tnt_3:give_tnt/give_small`);
-  raw(`function custom_tnt_3:give_tnt/give_knockback`);
-  raw(`function custom_tnt_3:give_tnt/give_jerome`);
-  raw(`function custom_tnt_3:give_tnt/give_tree`);
-  raw(`function custom_tnt_3:give_tnt/give_wolf`);
-  raw(`function custom_tnt_3:give_tnt/give_bees`);
-  raw(`function custom_tnt_3:give_tnt/give_honey`);
-  raw(`function custom_tnt_3:give_tnt/give_creeper`);
-  raw(`function custom_tnt_3:items/dynamite/give_acid_dynamite`);
-  raw(`function custom_tnt_3:items/dynamite/give_nuclear_dynamite`);
-  raw(`function custom_tnt_3:items/gravity_gun/give`);
+  const listOfTntFunction = [
+    "give_arrow",
+    "give_bees",
+    "give_creeper",
+    "give_ender",
+    "give_ghost",
+    "give_honey",
+    "give_levitation_tnt",
+    "give_lightning",
+    "give_meteorite",
+    "give_mobs",
+    "give_nausea_tnt",
+    "give_normal_tnt",
+    "give_missile_tnt",
+    "give_nuclear",
+    "give_warden",
+    "give_wither_tnt",
+    "give_wwz_tnt",
+  ];
+
+  listOfTntFunction.forEach((tnt) => {
+    raw(`function tnts_and_creepers_war:give_tnt/${tnt}`);
+  });
 });
