@@ -73,6 +73,14 @@ MCFunction(
           30,
           1,
           () => {
+            particle(
+              "minecraft:poof",
+              rel(0, 0, 0),
+              [1, 1, 1],
+              0.2,
+              100,
+              "force"
+            );
             for (let i = 0; i < 6; i++) {
               summon("minecraft:creeper", rel(Math.sin(i), 1.5, Math.cos(i)), {
                 active_effects: [
@@ -96,6 +104,14 @@ MCFunction(
           30,
           1,
           () => {
+            particle(
+              "minecraft:splash",
+              rel(0, 0, 0),
+              [1, 1, 1],
+              0,
+              400,
+              "force"
+            );
             for (let i = 2; i >= -2; i--) {
               for (let j = 2; j >= -2; j--) {
                 for (let k = -1; k >= -2; k--) {
