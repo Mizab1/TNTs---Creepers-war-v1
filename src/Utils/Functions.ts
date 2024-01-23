@@ -69,3 +69,13 @@ export function getRandomNumberInRange(
   const randomIndex = Math.floor(Math.random() * availableValues.length);
   return availableValues[randomIndex];
 }
+
+/**
+ * Returns a random element from the input array.
+ *
+ * @param {Array<T>} array - the input array
+ * @return {T} a random element from the input array
+ */
+export function randFromArray<T>(array: Array<T>): T {
+  return array[Math.floor(Math.random() * array.length)];
+}
