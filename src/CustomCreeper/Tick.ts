@@ -8,6 +8,7 @@ import {
   execute,
   rel,
   say,
+  setblock,
   summon,
   tag,
 } from "sandstone";
@@ -81,6 +82,28 @@ MCFunction(
                   },
                 ],
               });
+            }
+          }
+        );
+        createCustomCreeper(
+          "Water Creeper",
+          "water_creeper",
+          rel(0, 0, 0),
+          2,
+          30,
+          1,
+          () => {
+            for (let i = 2; i >= -2; i--) {
+              for (let j = 2; j >= -2; j--) {
+                for (let k = -1; k >= -2; k--) {
+                  execute
+                    .positioned(rel(i, k, j))
+                    .unless.block(rel(0, 0, 0), "minecraft:obsidian")
+                    .run(() => {
+                      setblock(rel(0, 0, 0), "minecraft:water", "replace");
+                    });
+                }
+              }
             }
           }
         );
