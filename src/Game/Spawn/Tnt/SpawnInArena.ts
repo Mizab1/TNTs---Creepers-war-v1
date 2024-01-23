@@ -6,12 +6,23 @@ const randTntScore = tntSpawnPrivate("rand_tnt_scr");
 const randLocationScore = tntSpawnPrivate("rand_loc_scr");
 
 const listOfCreepersFunction = [
-  "spawn_instant_creeper",
-  "spawn_recursive_creeper",
-  "spawn_fire_creeper",
-  "spawn_stone_creeper",
-  "spawn_surprise_creeper",
-  "spawn_water_creeper",
+  "give_arrow",
+  "give_bees",
+  "give_creeper",
+  "give_ender",
+  "give_ghost",
+  "give_honey",
+  "give_levitation_tnt",
+  "give_lightning",
+  "give_meteorite",
+  "give_mobs",
+  "give_nausea_tnt",
+  "give_normal_tnt",
+  // "give_missile_tnt",
+  // "give_nuclear",
+  // "give_warden",
+  // "give_wither_tnt",
+  // "give_wwz_tnt",
 ];
 
 const listOfLocations = [
@@ -42,6 +53,7 @@ const spawnClock = MCFunction(
         listOfLocations.forEach((location, j) => {
           execute.if(randTntScore.matches(i)).run(() => {
             execute.if(randLocationScore.matches(j)).run(() => {
+              //tnts_and_creepers_war:give_tnt/give_arrow
               say(tnt + " AT " + location);
             });
           });
