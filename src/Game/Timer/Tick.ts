@@ -5,11 +5,15 @@ import {
   Objective,
   _,
   abs,
+  execute,
   playsound,
+  scoreboard,
   setblock,
 } from "sandstone";
 import { b } from "../../Utils/Functions";
+import { bossbarTimerName, isStarted } from "../Tick";
 
+// User Defined Functions
 const setTimeSign = (coord: Coordinates) => {
   setblock(coord, "air");
   setblock(
@@ -29,17 +33,19 @@ const setTimeSign = (coord: Coordinates) => {
   );
 };
 
-//! Time is in minutes
+//! Time is in 10 Seconds format
 const timerPrivate = Objective.create("timer_pvt", "dummy");
-const settingTimer = timerPrivate("setting_timer");
-const countingTimer = timerPrivate("counting_timer");
+export const settingTimer = timerPrivate("setting_timer");
+export const countingTimer = timerPrivate("counting_timer");
+
+export const timerInterval: number = 10;
 
 // These are generics function like increasing and decreasing
 
 const increaseTimer = MCFunction("game/timer/increase_timer", () => {
   // This command is used to obtain the timer sign
   // give @p warped_sign{BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true},{"text":"Increase ","color":"green"},{"text":"]"}]','{"text":""}','{"text":"+10 Secs","color":"blue","clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/timer/increase_timer"}}']}}} 1
-  settingTimer.add(1);
+  settingTimer.add(timerInterval);
 
   // Display the time
   setTimeSign(abs(7, 54, -34));
@@ -57,8 +63,8 @@ const increaseTimer = MCFunction("game/timer/increase_timer", () => {
 const decreaseTimer = MCFunction("game/timer/decrease_timer", () => {
   // This command is used to obtain the timer sign
   // give @p warped_sign{BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true},{"text":"Decrease ","color":"green"},{"text":"]"}]','{"text":""}','{"text":"-10 Secs","color":"red","clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/timer/decrease_timer"}}']}}} 1
-  _.if(settingTimer.greaterThan(1), () => {
-    settingTimer.remove(1);
+  _.if(settingTimer.greaterThan(timerInterval), () => {
+    settingTimer.remove(timerInterval);
 
     // Display the time
     setTimeSign(abs(7, 54, -34));
@@ -75,5 +81,27 @@ const decreaseTimer = MCFunction("game/timer/decrease_timer", () => {
 });
 
 const resetTimer = MCFunction("game/timer/reset_timer", () => {
-  settingTimer.set(1);
+  settingTimer.set(timerInterval);
 });
+
+const timerCountdown = MCFunction(
+  "game/timer/timer_countdown",
+  () => {
+    _.if(isStarted.equalTo(1), () => {
+      _.if(countingTimer.greaterThan(0), () => {
+        countingTimer.remove(1);
+
+        // Update the timer bossbar
+        execute.store.result.bossbar(bossbarTimerName, "value").run(() => {
+          scoreboard.players.get(
+            countingTimer.target,
+            countingTimer.objective.name
+          );
+        });
+      });
+    });
+  },
+  {
+    runEach: "20t",
+  }
+);
