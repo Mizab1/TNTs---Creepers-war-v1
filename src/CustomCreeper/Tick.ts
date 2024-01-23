@@ -6,6 +6,8 @@ import {
   Score,
   Selector,
   execute,
+  fill,
+  particle,
   rel,
   say,
   setblock,
@@ -106,6 +108,29 @@ MCFunction(
                 }
               }
             }
+          }
+        );
+        createCustomCreeper(
+          "Fire Creeper",
+          "fire_creeper",
+          rel(0, 0, 0),
+          2,
+          30,
+          1,
+          () => {
+            particle(
+              "minecraft:flame",
+              rel(0, 1, 0),
+              [0.5, 0.5, 0.5],
+              0.2,
+              400,
+              "force"
+            );
+            fill(
+              rel(5, 2, 5),
+              rel(-5, -3, -5),
+              "minecraft:fire replace #aestd1:air"
+            );
           }
         );
       });
