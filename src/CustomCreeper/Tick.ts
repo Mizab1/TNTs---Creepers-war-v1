@@ -5,14 +5,19 @@ import {
   ObjectiveInstance,
   Score,
   Selector,
+  _,
+  abs,
   execute,
   fill,
+  loc,
   particle,
   rel,
   say,
+  schedule,
   setblock,
   summon,
   tag,
+  teleport,
 } from "sandstone";
 import { createCustomCreeper } from "./Private/CustomCreeperComponents";
 import { randFromArray } from "../Utils/Functions";
@@ -64,6 +69,7 @@ MCFunction(
           3,
           1,
           1,
+          null,
           null
         );
         createCustomCreeper(
@@ -95,7 +101,8 @@ MCFunction(
                 DeathLootTable: "minecraft:bat",
               });
             }
-          }
+          },
+          null
         );
         createCustomCreeper(
           "Water Creeper",
@@ -125,7 +132,8 @@ MCFunction(
                 }
               }
             }
-          }
+          },
+          null
         );
         createCustomCreeper(
           "Fire Creeper",
@@ -148,7 +156,8 @@ MCFunction(
               rel(-5, -3, -5),
               "minecraft:fire replace #aestd1:air"
             );
-          }
+          },
+          null
         );
         createCustomCreeper(
           "Stone Creeper",
@@ -187,6 +196,69 @@ MCFunction(
                 }
               }
             }
+          },
+          null
+        );
+        createCustomCreeper(
+          "Surprise Creeper",
+          "surprise_creeper",
+          rel(0, 0, 0),
+          2,
+          20,
+          1,
+          () => {
+            particle(
+              "minecraft:poof",
+              rel(0, 0, 0),
+              [0, 0, 0],
+              0.2,
+              3,
+              "force"
+            );
+          },
+          () => {
+            const nearestPlayerSelector = Selector("@a", {
+              distance: [Infinity, 4],
+            });
+            execute.if
+              .entity(nearestPlayerSelector)
+              .if.entity(Selector("@s", { tag: "!teleported" }))
+              .run(() => {
+                execute
+                  .at(nearestPlayerSelector)
+                  .rotated(["~", "0"])
+                  .run(() => {
+                    teleport(loc(0, 0, -1));
+                    tag(self).add("teleported");
+
+                    particle(
+                      "minecraft:portal",
+                      rel(0, 1, 0),
+                      [0.3, 0.3, 0.3],
+                      0.1,
+                      30,
+                      "force"
+                    );
+                  });
+
+                // Remove the tag after some time
+                schedule.function(
+                  () => {
+                    execute
+                      .as(
+                        Selector("@e", {
+                          type: "minecraft:creeper",
+                          tag: "teleported",
+                        })
+                      )
+                      .run(() => {
+                        tag(self).remove("teleported");
+                      });
+                  },
+                  "3s",
+                  "replace"
+                );
+              });
           }
         );
       });

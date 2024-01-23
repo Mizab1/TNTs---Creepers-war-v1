@@ -45,16 +45,16 @@ const SpawnFileForCustomCreeper = (
 };
 
 /**
- * Creates a custom creeper entity with the specified name, tag, coordinates, explosion radius, initial fuse, and final fuse.
- * If a creeper handler function is provided, it will be called when the creeper entity is executed.
+ * Creates a custom creeper entity with the specified name, tag, coordinates, explosion radius, initial fuse, final fuse, creeper handler function, and creeper run each tick function.
  *
- * @param {string} name - The name of the custom creeper entity.
- * @param {string} tag - The tag of the custom creeper entity.
- * @param {Coordinates} coords - The coordinates of the custom creeper entity.
- * @param {number} [explosionRadius=3] - The explosion radius of the custom creeper entity.
- * @param {number} [initialFuse=30] - The initial fuse of the custom creeper entity.
- * @param {number} [finalFuse=1] - The final fuse which will decide when will it explodes.
- * @param {() => void | null} creeperHandlerFunction - The function to be handles the exploding mechanics of the creeper.
+ * @param {string} name - the name of the custom creeper
+ * @param {string} tag - the tag of the custom creeper
+ * @param {Coordinates} coords - the coordinates of the custom creeper
+ * @param {number} [explosionRadius=3] - the explosion radius of the custom creeper
+ * @param {number} [initialFuse=30] - the initial fuse of the custom creeper
+ * @param {number} [finalFuse=1] - the final fuse of the custom creeper
+ * @param {{ (): void } | null} creeperHandlerFunction - the function to handle the custom creeper
+ * @param {{ (): void } | null} creeperRunEachTickFunction - the function to run each tick for the custom creeper
  */
 export const createCustomCreeper = (
   name: string,
@@ -63,7 +63,8 @@ export const createCustomCreeper = (
   explosionRadius: number = 3,
   initialFuse: number = 30,
   finalFuse: number = 1,
-  creeperHandlerFunction: () => void | null
+  creeperHandlerFunction: { (): void } | null,
+  creeperRunEachTickFunction: { (): void } | null
 ) => {
   // Call the spawnFileFunction
   SpawnFileForCustomCreeper(
@@ -82,12 +83,22 @@ export const createCustomCreeper = (
       .as(
         Selector("@s", {
           tag: [tag],
-          scores: { creeper_fuse_obj: [Infinity, finalFuse] },
         })
       )
       .at(self)
       .run(() => {
-        creeperHandlerFunction();
+        if (creeperRunEachTickFunction) {
+          creeperRunEachTickFunction();
+        }
+        execute.if
+          .entity(
+            Selector("@s", {
+              scores: { creeper_fuse_obj: [Infinity, finalFuse] },
+            })
+          )
+          .run(() => {
+            creeperHandlerFunction();
+          });
       });
   }
 };
