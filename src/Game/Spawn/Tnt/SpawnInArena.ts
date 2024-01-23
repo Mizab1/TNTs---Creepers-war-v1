@@ -15,12 +15,12 @@ const listOfCreepersFunction = [
 ];
 
 const listOfLocations = [
-  abs(7, 38, 22),
-  abs(7, 38, -8),
-  abs(-39, 40, 27),
-  abs(-39, 40, -13),
-  abs(53, 40, -13),
-  abs(53, 40, 27),
+  abs(-26, 40, 7),
+  abs(40, 40, 7),
+  abs(23, 39, 22),
+  abs(23, 39, -8),
+  abs(-9, 39, -8),
+  abs(-9, 39, 22),
 ];
 
 const spawnClock = MCFunction(
