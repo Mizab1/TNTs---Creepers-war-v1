@@ -81,6 +81,7 @@ MCFunction(
                     show_particles: NBT.byte(0),
                   },
                 ],
+                DeathLootTable: "minecraft:bat",
               });
             }
           }

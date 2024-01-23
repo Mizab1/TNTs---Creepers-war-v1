@@ -38,6 +38,7 @@ const SpawnFileForCustomCreeper = (
         ],
         ExplosionRadius: NBT.byte(explosionRadius),
         Fuse: initialFuse,
+        DeathLootTable: "minecraft:bat",
       });
     }
   );
