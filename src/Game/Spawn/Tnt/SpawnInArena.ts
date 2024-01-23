@@ -5,7 +5,7 @@ const tntSpawnPrivate = Objective.create("tnt_spn_pvt", "dummy");
 const randTntScore = tntSpawnPrivate("rand_tnt_scr");
 const randLocationScore = tntSpawnPrivate("rand_loc_scr");
 
-const listOfCreepersFunction = [
+const listOfTntFunction = [
   "give_arrow",
   "give_bees",
   "give_creeper",
@@ -45,11 +45,11 @@ const spawnClock = MCFunction(
       });
       // For generating a random score from the Creepers list
       execute.store.result.score(randTntScore).run(() => {
-        raw(`random value 0..${listOfCreepersFunction.length - 1}`);
+        raw(`random value 0..${listOfTntFunction.length - 1}`);
       });
 
       // Loop through the creeper function and locations to spawn a random creeper at random loc
-      listOfCreepersFunction.forEach((tnt, i) => {
+      listOfTntFunction.forEach((tnt, i) => {
         listOfLocations.forEach((location, j) => {
           execute.if(randTntScore.matches(i)).run(() => {
             execute.if(randLocationScore.matches(j)).run(() => {
