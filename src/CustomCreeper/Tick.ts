@@ -15,6 +15,7 @@ import {
   tag,
 } from "sandstone";
 import { createCustomCreeper } from "./Private/CustomCreeperComponents";
+import { randFromArray } from "../Utils/Functions";
 
 const self = Selector("@s");
 
@@ -147,6 +148,45 @@ MCFunction(
               rel(-5, -3, -5),
               "minecraft:fire replace #aestd1:air"
             );
+          }
+        );
+        createCustomCreeper(
+          "Stone Creeper",
+          "stone_creeper",
+          rel(0, 0, 0),
+          2,
+          30,
+          1,
+          () => {
+            particle(
+              "minecraft:block",
+              "minecraft:stone",
+              rel(0, 0, 0),
+              [2, 2, 2],
+              0.2,
+              400,
+              "force"
+            );
+
+            const stones: string[] = [
+              "minecraft:stone",
+              "minecraft:diorite",
+              "minecraft:andesite",
+              "minecraft:granite",
+              "minecraft:cobblestone",
+            ];
+            for (let i = 2; i >= -2; i--) {
+              for (let j = 2; j >= -2; j--) {
+                for (let k = 4; k >= 0; k--) {
+                  execute
+                    .positioned(rel(i, k, j))
+                    .unless.block(rel(0, 0, 0), "minecraft:obsidian")
+                    .run(() => {
+                      setblock(rel(0, 0, 0), randFromArray(stones), "replace");
+                    });
+                }
+              }
+            }
           }
         );
       });
