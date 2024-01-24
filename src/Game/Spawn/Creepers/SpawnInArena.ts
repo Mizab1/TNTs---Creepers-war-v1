@@ -14,14 +14,7 @@ const listOfCreepersFunction = [
   "spawn_water_creeper",
 ];
 
-const listOfLocations = [
-  abs(7, 38, 22),
-  abs(7, 38, -8),
-  abs(-39, 40, 27),
-  abs(-39, 40, -13),
-  abs(53, 40, -13),
-  abs(53, 40, 27),
-];
+const listOfLocations = [abs(7, 38, 22), abs(7, 38, -8), abs(-39, 40, 27), abs(-39, 40, -13), abs(53, 40, -13), abs(53, 40, 27)];
 
 const spawnClock = MCFunction(
   "game/spawn/creepers/spawn_clock",
@@ -42,12 +35,8 @@ const spawnClock = MCFunction(
         listOfLocations.forEach((location, j) => {
           execute.if(randCreeperScore.matches(i)).run(() => {
             execute.if(randLocationScore.matches(j)).run(() => {
-              say("custom_creeper/spawn/" + creeper + " AT " + location);
-              // execute
-              //   .positioned(location)
-              //   .run.functionCmd(
-              //     `tnts_and_creepers_war:custom_creeper/spawn/${creeper}`
-              //   );
+              // say("custom_creeper/spawn/" + creeper + " AT " + location);
+              execute.positioned(location).run.functionCmd(`tnts_and_creepers_war:custom_creeper/spawn/${creeper}`);
             });
           });
         });
