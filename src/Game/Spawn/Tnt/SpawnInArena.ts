@@ -1,12 +1,4 @@
-import {
-  MCFunction,
-  Objective,
-  abs,
-  execute,
-  functionCmd,
-  raw,
-  say,
-} from "sandstone";
+import { MCFunction, Objective, abs, execute, functionCmd, raw, say } from "sandstone";
 import { isStarted } from "../../Tick";
 
 const tntSpawnPrivate = Objective.create("tnt_spn_pvt", "dummy");
@@ -33,14 +25,7 @@ const listOfTntFunction = [
   // "give_wwz_tnt",
 ];
 
-const listOfLocations = [
-  abs(-26, 40, 7),
-  abs(40, 40, 7),
-  abs(23, 39, 22),
-  abs(23, 39, -8),
-  abs(-9, 39, -8),
-  abs(-9, 39, 22),
-];
+const listOfLocations = [abs(-26, 40, 7), abs(40, 40, 7), abs(23, 39, 22), abs(23, 39, -8), abs(-9, 39, -8), abs(-9, 39, 22)];
 
 const spawnClock = MCFunction(
   "game/spawn/tnt/spawn_clock",
@@ -61,10 +46,8 @@ const spawnClock = MCFunction(
         listOfLocations.forEach((location, j) => {
           execute.if(randTntScore.matches(i)).run(() => {
             execute.if(randLocationScore.matches(j)).run(() => {
-              // execute
-              //   .positioned(location)
-              //   .run.functionCmd(`tnts_and_creepers_war:give_tnt/${tnt}`);
-              say(tnt + " AT " + location);
+              execute.positioned(location).run.functionCmd(`tnts_and_creepers_war:give_tnt/${tnt}`);
+              // say(tnt + " AT " + location);
             });
           });
         });
