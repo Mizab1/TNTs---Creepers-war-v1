@@ -33,6 +33,7 @@ const startGame = MCFunction("game/start_game", () => {
   // @ts-ignore
   bossbar.set(bossbarTimerName).visible(true);
   bossbar.set(bossbarTimerName).players("@a");
+  bossbar.set(bossbarTimerName).color("yellow");
   execute.store.result
     .bossbar(bossbarTimerName, "max")
     .run.scoreboard.players.get(
