@@ -1,11 +1,22 @@
 import {
   MCFunction,
   Objective,
+  Selector,
+  _,
+  abs,
   bossbar,
+  clear,
   effect,
   execute,
+  gamemode,
+  kill,
+  teleport,
   tellraw,
 } from "sandstone";
+import { giveGun } from "../Items/GravityGun";
+import { self } from "../Tick";
+import { initDeathScore, resetDeathScore, setDisplayDeathScore } from "./Scores/DeathScore";
+import { joinedTeam, teamBlueMember, teamOrangeMember } from "./Teams/Tick";
 import { countingTimer, settingTimer } from "./Timer/Tick";
 
 const GamePrivate = Objective.create("game_pvt", "dummy");
@@ -16,36 +27,75 @@ const Tick = MCFunction(
   "game/tick",
   () => {
     // Give night vision to players
-    effect.give("@a", "minecraft:night_vision", 10, 1, true);
+    effect.give("@a", "minecraft:night_vision", 20, 1, true);
   },
   { runEachTick: true }
 );
 
+/* Sign command for the start sign
+give @p warped_sign{display:{Name:'{"text":"start sign"}'},BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true,"italic":false,"clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/start_game"}},{"text":"Start","color":"gold"},{"text":" ]","color":"gray","bold":true,"italic":false}]','{"text":""}','{"text":""}']},is_waxed:1b}} 1
+*/
 // Function to start and end the game
 const startGame = MCFunction("game/start_game", () => {
-  isStarted.set(1);
+  _.if(_.and(teamOrangeMember, teamBlueMember), () => {
+    isStarted.set(1);
 
-  // Transfer the settingTimer to counterTimer
-  countingTimer.set(settingTimer);
+    // Transfer the settingTimer to counterTimer
+    countingTimer.set(settingTimer);
 
-  // Display the bossbar and set the max
-  bossbar.add(bossbarTimerName, { text: "Timer" });
-  // @ts-ignore
-  bossbar.set(bossbarTimerName).visible(true);
-  bossbar.set(bossbarTimerName).players("@a");
-  bossbar.set(bossbarTimerName).color("yellow");
-  execute.store.result
-    .bossbar(bossbarTimerName, "max")
-    .run.scoreboard.players.get(
-      countingTimer.target,
-      countingTimer.objective.name
-    );
+    // Display the bossbar and set the max
+    bossbar.add(bossbarTimerName, { text: "Timer" });
+    // @ts-ignore
+    bossbar.set(bossbarTimerName).visible(true);
+    bossbar.set(bossbarTimerName).players("@a");
+    bossbar.set(bossbarTimerName).color("yellow");
+    execute.store.result
+      .bossbar(bossbarTimerName, "max")
+      .run.scoreboard.players.get(countingTimer.target, countingTimer.objective.name);
 
-  tellraw("@a", { text: "Game started", color: "green" });
+    // Perform operation on the death score
+    resetDeathScore();
+    initDeathScore();
+    setDisplayDeathScore();
+
+    // Teleport the players to their respective spots and set the spawnpoint
+    execute.as(teamOrangeMember).run(() => {
+      const startingCoords = abs(7, 39, 38);
+      teleport(self, startingCoords);
+    });
+    execute.as(teamBlueMember).run(() => {
+      const startingCoords = abs(7, 39, -24);
+      teleport(self, startingCoords);
+    });
+
+    // Give gravity gun to all the players
+    execute.as(joinedTeam).run(() => {
+      giveGun();
+    });
+
+    // Set gamemode to survival
+    execute.as(joinedTeam).run(() => {
+      gamemode("survival", self);
+    });
+
+    tellraw("@a", { text: "Game started", color: "green" });
+  }).else(() => {
+    tellraw("@a", { text: "One or both teams are empty :(", color: "red" });
+  });
 });
 
-const endGame = MCFunction("game/end_game", () => {
+export const endGame = MCFunction("game/end_game", () => {
   isStarted.set(0);
+
+  countingTimer.set(0);
+
+  // Kill all the TNTs and creepers
+  kill(Selector("@e", { type: "minecraft:creeper", tag: "custom_creeper" }));
+  kill(Selector("@e", { type: "minecraft:item", tag: "custom_tnt_item" }));
+
+  // Clear the inventory of the player and effects
+  clear(joinedTeam);
+  effect.clear(joinedTeam);
 
   // Remove the bossbar
   bossbar.remove(bossbarTimerName);
