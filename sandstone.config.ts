@@ -10,7 +10,8 @@ export default {
   // ! Change the World in the Batch file also
   // saveOptions: { path: "./.sandstone/output/datapack" },
   // saveOptions: { world: "Testing 4" },
-  saveOptions: { world: "Gravity TNT" },
+  // saveOptions: { world: "Gravity TNT" },
+  saveOptions: { world: "Gravity TNT - Copy" },
   onConflict: {
     default: "warn",
   },
@@ -18,7 +19,7 @@ export default {
     afterAll: () => {
       // @ts-ignore
       let worldName = this.default.saveOptions.world;
-      // addDependencies(worldName);
+      addDependencies(worldName);
     },
   },
 } as SandstoneConfig;
