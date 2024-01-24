@@ -9,7 +9,11 @@ import {
   effect,
   execute,
   gamemode,
+  give,
   kill,
+  playsound,
+  rel,
+  spawnpoint,
   teleport,
   tellraw,
 } from "sandstone";
@@ -62,21 +66,27 @@ const startGame = MCFunction("game/start_game", () => {
     execute.as(teamOrangeMember).run(() => {
       const startingCoords = abs(7, 39, 38);
       teleport(self, startingCoords);
+      spawnpoint(self, startingCoords);
     });
     execute.as(teamBlueMember).run(() => {
       const startingCoords = abs(7, 39, -24);
       teleport(self, startingCoords);
+      spawnpoint(self, startingCoords);
     });
 
     // Give gravity gun to all the players
     execute.as(joinedTeam).run(() => {
       giveGun();
+      give(self, "minecraft:cooked_beef", 64);
     });
 
     // Set gamemode to survival
     execute.as(joinedTeam).run(() => {
       gamemode("survival", self);
     });
+
+    // Play sounds
+    execute.as(joinedTeam).at(self).run.playsound("minecraft:block.note_block.chime", "master", self, rel(0, 0, 0), 1, 0.8);
 
     tellraw("@a", { text: "Game started", color: "green" });
   }).else(() => {
@@ -87,7 +97,7 @@ const startGame = MCFunction("game/start_game", () => {
 export const endGame = MCFunction("game/end_game", () => {
   isStarted.set(0);
 
-  countingTimer.set(0);
+  countingTimer.set(-1);
 
   // Kill all the TNTs and creepers
   kill(Selector("@e", { type: "minecraft:creeper", tag: "custom_creeper" }));
