@@ -1,6 +1,8 @@
-import { Coordinates, MCFunction, NBT, Objective, _, abs, execute, playsound, scoreboard, setblock } from "sandstone";
+import { Coordinates, MCFunction, NBT, Objective, _, abs, execute, playsound, scoreboard, setblock, title } from "sandstone";
 import { b } from "../../Utils/Functions";
 import { bossbarTimerName, isStarted } from "../Tick";
+import { joinedTeam } from "../Teams/Tick";
+import { self } from "../../Tick";
 
 // User Defined Functions
 const setTimeSign = (coord: Coordinates) => {
@@ -63,13 +65,19 @@ const timerCountdown = MCFunction(
   "game/timer/timer_countdown",
   () => {
     _.if(isStarted.equalTo(1), () => {
-      _.if(countingTimer.greaterThan(0), () => {
+      _.if(countingTimer.greaterThan(-1), () => {
         countingTimer.remove(1);
 
         // Update the timer bossbar
         execute.store.result.bossbar(bossbarTimerName, "value").run(() => {
           scoreboard.players.get(countingTimer.target, countingTimer.objective.name);
         });
+      });
+
+      _.if(countingTimer.matches([1, 3]), () => {
+        execute.as(joinedTeam).at(self).run.playsound("minecraft:block.note_block.bell", "master", self);
+
+        title(joinedTeam).title({ score: { name: countingTimer.target, objective: countingTimer.objective.name }, color: "red" });
       });
     });
   },
