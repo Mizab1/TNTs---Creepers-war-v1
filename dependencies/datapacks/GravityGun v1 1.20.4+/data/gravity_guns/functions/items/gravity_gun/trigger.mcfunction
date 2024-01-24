@@ -10,7 +10,7 @@ scoreboard players add @s gravity_sneak 0
 execute if entity @s[nbt={SelectedItem:{id:"minecraft:warped_fungus_on_a_stick",Count:1b,tag:{tnt_gravity_gun:1b}}}] run function gravity_guns:items/gravity_gun/firing_tnt_gravity_gun
 
 # Lifting Mobs
-execute if entity @s[nbt={SelectedItem:{id:"minecraft:warped_fungus_on_a_stick",Count:1b,tag:{tnt_gravity_gun:1b}}}] run function gravity_guns:items/gravity_gun/firing_tnt_gravity_gun
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:warped_fungus_on_a_stick",Count:1b,tag:{mob_gravity_gun:1b}}}] run function gravity_guns:items/gravity_gun/firing_mob_gravity_gun
 
 
 
