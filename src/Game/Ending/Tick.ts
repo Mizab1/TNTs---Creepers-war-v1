@@ -9,7 +9,7 @@ import { joinedTeam } from "../Teams/Tick";
 const tick = MCFunction(
   "game/ending/tick",
   () => {
-    _.if(countingTimer.matches(1), () => {
+    _.if(countingTimer.matches(0), () => {
       // Initialize the endgame sequence
       endGame();
 
