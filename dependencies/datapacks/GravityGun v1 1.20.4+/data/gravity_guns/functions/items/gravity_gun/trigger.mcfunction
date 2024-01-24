@@ -5,12 +5,14 @@ execute store result score @s gravity_id run data get entity @s UUID[3]
 scoreboard players add @s gravity_sneak 0
 
 #===< Gravity Entity >===
-fill ~0.5 ~0.5 ~0.5 ~-0.5 ~-0.5 ~-0.5 air replace tnt
-execute positioned ~-.5 ~-.5 ~-.5 if entity @e[tag=!gravity_exclude,type=!player,type=!#gravity_guns:nonalive,dx=0,dy=0,dz=0] run tag @s add gravity_hold_entity
-execute positioned ~-.5 ~-.5 ~-.5 run tag @e[tag=!gravity_exclude,type=!player,type=!#gravity_guns:nonalive,dx=0,dy=0,dz=0,limit=1] add gravity_base
-execute positioned ~-.5 ~-.5 ~-.5 if entity @e[type=armor_stand, tag=tnt.as ,dx=0,dy=0,dz=0] run tag @s add gravity_hold_entity
-execute positioned ~-.5 ~-.5 ~-.5 run tag @e[type=armor_stand, tag=tnt.as ,dx=0,dy=0,dz=0,limit=1] add gravity_base
-execute positioned ~-.5 ~-.5 ~-.5 run tag @e[type=armor_stand, tag=tnt.as ,dx=0,dy=0,dz=0,limit=1] add picked_up
+
+# Lifting TNTs
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:warped_fungus_on_a_stick",Count:1b,tag:{tnt_gravity_gun:1b}}}] run function gravity_guns:items/gravity_gun/firing_tnt_gravity_gun
+
+# Lifting Mobs
+execute if entity @s[nbt={SelectedItem:{id:"minecraft:warped_fungus_on_a_stick",Count:1b,tag:{tnt_gravity_gun:1b}}}] run function gravity_guns:items/gravity_gun/firing_tnt_gravity_gun
+
+
 
 #===< Gravity Blocks >===
 # execute if block ~ ~ ~ #gravity_guns:dragable run tag @s add gravity_hold_block

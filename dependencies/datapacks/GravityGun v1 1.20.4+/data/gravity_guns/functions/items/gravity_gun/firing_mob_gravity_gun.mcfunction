@@ -1,0 +1,2 @@
+execute positioned ~-.5 ~-.5 ~-.5 if entity @e[tag=!gravity_exclude,type=!player,type=!#gravity_guns:nonalive,dx=0,dy=0,dz=0] run tag @s add gravity_hold_entity
+execute positioned ~-.5 ~-.5 ~-.5 run tag @e[tag=!gravity_exclude,type=!player,type=!#gravity_guns:nonalive,dx=0,dy=0,dz=0,limit=1] add gravity_base
