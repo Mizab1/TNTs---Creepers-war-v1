@@ -1,15 +1,4 @@
-import {
-  Coordinates,
-  MCFunction,
-  NBT,
-  Objective,
-  _,
-  abs,
-  execute,
-  playsound,
-  scoreboard,
-  setblock,
-} from "sandstone";
+import { Coordinates, MCFunction, NBT, Objective, _, abs, execute, playsound, scoreboard, setblock } from "sandstone";
 import { b } from "../../Utils/Functions";
 import { bossbarTimerName, isStarted } from "../Tick";
 
@@ -50,14 +39,7 @@ const increaseTimer = MCFunction("game/timer/increase_timer", () => {
   // Display the time
   setTimeSign(abs(7, 54, -34));
 
-  playsound(
-    "minecraft:block.dispenser.dispense",
-    "master",
-    "@a",
-    abs(7, 54, -34),
-    1,
-    1.2
-  );
+  playsound("minecraft:block.dispenser.dispense", "master", "@a", abs(7, 54, -34), 1, 1.2);
 });
 
 const decreaseTimer = MCFunction("game/timer/decrease_timer", () => {
@@ -69,14 +51,7 @@ const decreaseTimer = MCFunction("game/timer/decrease_timer", () => {
     // Display the time
     setTimeSign(abs(7, 54, -34));
 
-    playsound(
-      "minecraft:block.dispenser.dispense",
-      "master",
-      "@a",
-      abs(7, 54, -34),
-      1,
-      1.4
-    );
+    playsound("minecraft:block.dispenser.dispense", "master", "@a", abs(7, 54, -34), 1, 1.4);
   });
 });
 
@@ -93,10 +68,7 @@ const timerCountdown = MCFunction(
 
         // Update the timer bossbar
         execute.store.result.bossbar(bossbarTimerName, "value").run(() => {
-          scoreboard.players.get(
-            countingTimer.target,
-            countingTimer.objective.name
-          );
+          scoreboard.players.get(countingTimer.target, countingTimer.objective.name);
         });
       });
     });
