@@ -1,13 +1,4 @@
-import {
-  MCFunction,
-  NBT,
-  Selector,
-  _,
-  execute,
-  rel,
-  summon,
-  tp,
-} from "sandstone";
+import { MCFunction, NBT, Selector, _, execute, rel, summon, tp } from "sandstone";
 import { self } from "../Tick";
 
 /**
@@ -33,9 +24,7 @@ export const slimeEntity = () => {
 // Summon a slime at the position of TNT's armor stand to disable the slots of the armor stand so that player can't interact with it
 export const spawnSlime = MCFunction("custom_tnt/spawn_slime", () => {
   execute
-    .at(
-      Selector("@e", { type: "armor_stand", tag: ["tnt.as", "gravity_base"] })
-    )
+    .at(Selector("@e", { type: "armor_stand", tag: ["tnt.as"] }))
     .unless(
       Selector("@e", {
         type: "minecraft:slime",
@@ -43,6 +32,7 @@ export const spawnSlime = MCFunction("custom_tnt/spawn_slime", () => {
         distance: [Infinity, 1],
       })
     )
+    .positioned(rel(0, -0.5, 0))
     .run(() => {
       slimeEntity();
     });
