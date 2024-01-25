@@ -9,6 +9,7 @@ import {
   abs,
   execute,
   fill,
+  kill,
   loc,
   particle,
   rel,
@@ -40,13 +41,23 @@ MCFunction(
         // Decrease the timer of the fuse from the individual scoreboard
         execute.if(creeperFuse.greaterThan(0)).run(() => {
           creeperFuse.remove(1);
+          _.if(creeperFuse.equalTo(1), () => {
+            summon("minecraft:creeper", rel(0, 0, 0), {
+              Fuse: 0,
+              ignited: NBT.byte(1),
+            });
+            kill(self);
+          });
         });
 
         // Detecting if the creeper is ignited and storing its Fuse in a scoreboard
-        execute.if.entity(Selector("@s", { tag: ["!ignited"], nbt: { ignited: NBT.byte(1) } })).run(() => {
-          tag(self).add("ignited");
-          execute.store.result.score(self, "creeper_fuse_obj").run.data.get.entity(self, "Fuse");
-        });
+        execute.if
+          .entity(Selector("@s", { tag: ["!ignited"] }))
+          .if.entity(Selector("@a", { distance: [Infinity, 3] }))
+          .run(() => {
+            tag(self).add("ignited");
+            execute.store.result.score(self, "creeper_fuse_obj").run.data.get.entity(self, "Fuse");
+          });
         /* END */
 
         // Run the creeper handler every tick and create a creeper file once
