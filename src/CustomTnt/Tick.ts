@@ -20,10 +20,8 @@ import {
 } from "sandstone";
 import { self } from "../Tick";
 import { randomIntFromInterval } from "../Utils/Functions";
-import {
-  explosionHandler,
-  placeAndCreateFunction,
-} from "./private/SetupGenerics";
+import { explosionHandler, placeAndCreateFunction } from "./private/SetupGenerics";
+import { teleportWithinArena } from "../Game/TeleportWithinArena";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
   execute
@@ -33,42 +31,22 @@ export const setTntblock = MCFunction("custom_tnt/setblock", () => {
       // Creates the "Give TNT" function and does the processing if Custom TNT is placed
       // New TNT
       placeAndCreateFunction("give_mobs", "Mobs TNT", "animals", 110005);
-      placeAndCreateFunction(
-        "give_lightning",
-        "Lightning Strike TNT",
-        "lightning",
-        110006
-      );
+      placeAndCreateFunction("give_lightning", "Lightning Strike TNT", "lightning", 110006);
       placeAndCreateFunction("give_nuclear", "Nuclear TNT", "nuclear", 110008);
       placeAndCreateFunction("give_warden", "Warden TNT", "warden", 110009);
       placeAndCreateFunction("give_bees", "Angry Bees TNT", "bees", 110017);
       placeAndCreateFunction("give_honey", "Honey TNT", "honey", 110018);
       placeAndCreateFunction("give_creeper", "Creeper TNT", "creeper", 110019);
-      placeAndCreateFunction(
-        "give_meteorite",
-        "Meteorite TNT",
-        "meteor",
-        120001
-      );
+      placeAndCreateFunction("give_meteorite", "Meteorite TNT", "meteor", 120001);
       placeAndCreateFunction("give_arrow", "Arrow TNT", "arrow", 120005);
       placeAndCreateFunction("give_ghost", "Ghost TNT", "ghost", 120008);
       placeAndCreateFunction("give_ender", "Ender TNT", "ender", 120009);
       placeAndCreateFunction("give_normal_tnt", "Normal TNT", "normal", 130001);
       placeAndCreateFunction("give_nausea_tnt", "Nausea TNT", "nausea", 130002);
-      placeAndCreateFunction(
-        "give_levitation_tnt",
-        "Levitation TNT",
-        "levitation",
-        130003
-      );
+      placeAndCreateFunction("give_levitation_tnt", "Levitation TNT", "levitation", 130003);
       placeAndCreateFunction("give_wither_tnt", "Wither TNT", "wither", 130004);
       placeAndCreateFunction("give_wwz_tnt", "World War Z TNT", "wwz", 130005);
-      placeAndCreateFunction(
-        "give_missile_tnt",
-        "Missile TNT",
-        "missile",
-        130006
-      );
+      placeAndCreateFunction("give_missile_tnt", "Missile TNT", "missile", 130006);
     });
 });
 
@@ -83,14 +61,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.animals",
         100,
         () => {
-          particle(
-            "minecraft:cloud",
-            rel(0, 1, 0),
-            [0.1, 0.5, 0.1],
-            0.1,
-            1,
-            "force"
-          );
+          particle("minecraft:cloud", rel(0, 1, 0), [0.1, 0.5, 0.1], 0.1, 1, "force");
         },
         () => {
           for (let i = 0; i < 2; i++) {
@@ -181,22 +152,8 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.nuclear",
         100,
         () => {
-          particle(
-            "minecraft:crimson_spore",
-            rel(0, 0.8, 0),
-            [0, 0, 0],
-            0,
-            20,
-            "force"
-          );
-          particle(
-            "minecraft:soul_fire_flame",
-            rel(0, 0.8, 0),
-            [0, 0, 0],
-            0.1,
-            5,
-            "force"
-          );
+          particle("minecraft:crimson_spore", rel(0, 0.8, 0), [0, 0, 0], 0, 20, "force");
+          particle("minecraft:soul_fire_flame", rel(0, 0.8, 0), [0, 0, 0], 0.1, 5, "force");
           raw(`particle angry_villager ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
         },
         () => {
@@ -214,17 +171,8 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.warden",
         100,
         () => {
-          raw(
-            `particle falling_dust black_concrete ~ ~0.8 ~ 0.5 0.5 0.5 1 2 normal`
-          );
-          particle(
-            "minecraft:smoke",
-            rel(0, 0.8, 0),
-            [0.2, 0.2, 0.2],
-            0.1,
-            5,
-            "force"
-          );
+          raw(`particle falling_dust black_concrete ~ ~0.8 ~ 0.5 0.5 0.5 1 2 normal`);
+          particle("minecraft:smoke", rel(0, 0.8, 0), [0.2, 0.2, 0.2], 0.1, 5, "force");
           // raw(`particle sonic_boom ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
         },
         () => {
@@ -244,12 +192,8 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.bees",
         100,
         () => {
-          raw(
-            `particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 4 force`
-          );
-          raw(
-            `particle minecraft:falling_nectar ~ ~0.8 ~ 0.3 0.3 0.3 1 20 force`
-          );
+          raw(`particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 4 force`);
+          raw(`particle minecraft:falling_nectar ~ ~0.8 ~ 0.3 0.3 0.3 1 20 force`);
         },
         () => {
           gamerule("universalAnger", true);
@@ -272,17 +216,11 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.honey",
         100,
         () => {
-          raw(
-            `particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 2 force`
-          );
-          raw(
-            `particle minecraft:falling_honey ~ ~0.8 ~ 0.5 0.5 0.5 1 4 force`
-          );
+          raw(`particle minecraft:block honey_block ~ ~0.8 ~ 0.3 0.3 0.3 1 2 force`);
+          raw(`particle minecraft:falling_honey ~ ~0.8 ~ 0.5 0.5 0.5 1 4 force`);
         },
         () => {
-          raw(
-            `fill ~-2 ~-2 ~-2 ~2 ~ ~2 minecraft:honey_block replace #aestd1:all_but_air`
-          );
+          raw(`fill ~-2 ~-2 ~-2 ~2 ~ ~2 minecraft:honey_block replace #aestd1:all_but_air`);
           summon("minecraft:creeper", rel(0, 0, 0), {
             Fuse: 0,
             ignited: NBT.byte(1),
@@ -297,9 +235,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.creeper",
         100,
         () => {
-          raw(
-            `particle minecraft:ambient_entity_effect ~ ~0.8 ~ 0.1 0.1 0.1 1 10 force`
-          );
+          raw(`particle minecraft:ambient_entity_effect ~ ~0.8 ~ 0.1 0.1 0.1 1 10 force`);
         },
         () => {
           for (let i = 0; i < 5; i++) {
@@ -344,14 +280,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               "force"
             );
           }
-          particle(
-            "minecraft:ash",
-            rel(0, 0.8, 0),
-            [0.1, 0.5, 0.1],
-            0.1,
-            50,
-            "force"
-          );
+          particle("minecraft:ash", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.1, 50, "force");
         },
         () => {
           raw(
@@ -365,52 +294,27 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.arrow",
         100,
         () => {
-          particle(
-            "minecraft:crit",
-            rel(0, 0.8, 0),
-            [0.5, 0.5, 0.5],
-            0,
-            2,
-            "force"
-          );
-          particle(
-            "minecraft:item",
-            "minecraft:arrow",
-            rel(0, 1.3, 0),
-            [0, 0.3, 0],
-            0,
-            4,
-            "force"
-          );
+          particle("minecraft:crit", rel(0, 0.8, 0), [0.5, 0.5, 0.5], 0, 2, "force");
+          particle("minecraft:item", "minecraft:arrow", rel(0, 1.3, 0), [0, 0.3, 0], 0, 4, "force");
         },
         () => {
           // Square Generation
           for (let i = -10; i <= 10; i += 1) {
             for (let j = -10; j <= 10; j += 1) {
-              summon(
-                "minecraft:arrow",
-                rel(i, randomIntFromInterval(30, 40), j),
-                {
-                  Tags: ["tnt_arrow"],
-                }
-              );
-              summon(
-                "minecraft:arrow",
-                rel(i, randomIntFromInterval(60, 70), j),
-                {
-                  Potion: "minecraft:poison",
-                  Tags: ["tnt_arrow"],
-                }
-              );
+              summon("minecraft:arrow", rel(i, randomIntFromInterval(30, 40), j), {
+                Tags: ["tnt_arrow"],
+              });
+              summon("minecraft:arrow", rel(i, randomIntFromInterval(60, 70), j), {
+                Potion: "minecraft:poison",
+                Tags: ["tnt_arrow"],
+              });
             }
           }
 
           // Kill the arrows
           schedule.function(
             () => {
-              kill(
-                Selector("@e", { type: "minecraft:arrow", tag: "tnt_arrow" })
-              );
+              kill(Selector("@e", { type: "minecraft:arrow", tag: "tnt_arrow" }));
             },
             "150t",
             "replace"
@@ -423,54 +327,22 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.ghost",
         100,
         () => {
-          particle(
-            "minecraft:block",
-            "minecraft:black_concrete",
-            rel(0, 0.8, 0),
-            [0.5, 0.5, 0.5],
-            0,
-            2,
-            "force"
-          );
+          particle("minecraft:block", "minecraft:black_concrete", rel(0, 0.8, 0), [0.5, 0.5, 0.5], 0, 2, "force");
           // @ts-ignore
-          particle(
-            "minecraft:dust",
-            [0, 0, 0],
-            1,
-            rel(0, 0.8, 0),
-            [0, 0.3, 0],
-            0.01,
-            4,
-            "force"
-          );
+          particle("minecraft:dust", [0, 0, 0], 1, rel(0, 0.8, 0), [0, 0.3, 0], 0.01, 4, "force");
         },
         () => {
           summon("minecraft:block_display", rel(0, 0, 0), {
             transformation: {
-              left_rotation: [
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(1),
-              ],
-              right_rotation: [
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(1),
-              ],
+              left_rotation: [NBT.float(0), NBT.float(0), NBT.float(0), NBT.float(1)],
+              right_rotation: [NBT.float(0), NBT.float(0), NBT.float(0), NBT.float(1)],
               translation: [NBT.float(-2.5), NBT.float(0), NBT.float(-2.5)],
               scale: [NBT.float(5), NBT.float(5), NBT.float(5)],
             },
             block_state: { Name: "minecraft:black_concrete" },
             Tags: ["ghost_block_display"],
           });
-          playsound(
-            "minecraft:ambient.crimson_forest.mood",
-            "master",
-            "@a",
-            rel(0, 0, 0)
-          );
+          playsound("minecraft:ambient.crimson_forest.mood", "master", "@a", rel(0, 0, 0));
           schedule.function(
             () => {
               execute
@@ -506,47 +378,16 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.ender",
         100,
         () => {
-          particle(
-            "minecraft:crimson_spore",
-            rel(0, 0.8, 0),
-            [0.5, 0.5, 0.5],
-            0,
-            2,
-            "force"
-          );
-          particle(
-            "minecraft:reverse_portal",
-            rel(0, 0.8, 0),
-            [0, 0.3, 0],
-            0.01,
-            4,
-            "force"
-          );
+          particle("minecraft:crimson_spore", rel(0, 0.8, 0), [0.5, 0.5, 0.5], 0, 2, "force");
+          particle("minecraft:reverse_portal", rel(0, 0.8, 0), [0, 0.3, 0], 0.01, 4, "force");
         },
         () => {
-          spreadplayers(
-            rel(0, 0),
-            5,
-            20,
-            false,
-            Selector("@e", {
-              type: "#aestd1:living_base",
-              sort: "nearest",
-              distance: [Infinity, 10], // ! Change the particle radius also
-            })
-          );
+          teleportWithinArena();
         },
         null,
         () => {
           for (let i = 0; i < 40; i++) {
-            particle(
-              "minecraft:portal",
-              rel(Math.sin(i) * 10, 1, Math.cos(i) * 10),
-              [0, 0, 0],
-              0,
-              1,
-              "force"
-            );
+            particle("minecraft:portal", rel(Math.sin(i) * 10, 1, Math.cos(i) * 10), [0, 0, 0], 0, 1, "force");
           }
         }
       );
@@ -554,14 +395,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.normal",
         100,
         () => {
-          particle(
-            "minecraft:smoke",
-            rel(0, 0.8, 0),
-            [0.1, 0.3, 0.1],
-            0.1,
-            2,
-            "force"
-          );
+          particle("minecraft:smoke", rel(0, 0.8, 0), [0.1, 0.3, 0.1], 0.1, 2, "force");
         },
         () => {
           summon("minecraft:creeper", rel(0, 0, 0), {
@@ -591,18 +425,8 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         () => {
           summon("minecraft:block_display", rel(0, 0, 0), {
             transformation: {
-              left_rotation: [
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(1),
-              ],
-              right_rotation: [
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(0),
-                NBT.float(1),
-              ],
+              left_rotation: [NBT.float(0), NBT.float(0), NBT.float(0), NBT.float(1)],
+              right_rotation: [NBT.float(0), NBT.float(0), NBT.float(0), NBT.float(1)],
               translation: [NBT.float(-2.5), NBT.float(0), NBT.float(-2.5)],
               scale: [NBT.float(5), NBT.float(5), NBT.float(5)],
             },
@@ -644,35 +468,15 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.levitation",
         100,
         () => {
-          particle(
-            "minecraft:ash",
-            rel(0, 0.8, 0),
-            [0.1, 0.5, 0.1],
-            0.1,
-            50,
-            "force"
-          );
+          particle("minecraft:ash", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.1, 50, "force");
         },
         () => {
-          effect.give(
-            Selector("@a", { distance: [Infinity, 10] }),
-            "minecraft:levitation",
-            3,
-            10,
-            true
-          ); // ! Change the particle radius also
+          effect.give(Selector("@a", { distance: [Infinity, 10] }), "minecraft:levitation", 3, 10, true); // ! Change the particle radius also
         },
         null,
         () => {
           for (let i = 0; i < 40; i++) {
-            particle(
-              "minecraft:instant_effect",
-              rel(Math.sin(i) * 10, 1, Math.cos(i) * 10),
-              [0, 0, 0],
-              0,
-              1,
-              "force"
-            );
+            particle("minecraft:instant_effect", rel(Math.sin(i) * 10, 1, Math.cos(i) * 10), [0, 0, 0], 0, 1, "force");
           }
         }
       );
@@ -816,30 +620,27 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           let maxMissileCount = 5;
 
           // Recursively call the spawn missile function with base-case
-          const spawnMissileFunction = MCFunction(
-            "misc/missile_tnt/spawn_missile",
-            () => {
-              schedule.function(
-                () => {
-                  execute
-                    .as(missileAnchor)
-                    .at(self)
-                    .run(() => {
-                      functionCmd("missile:spawn_missile");
-                      _.if(missileCount.lessThan(5), () => {
-                        missileCount.add(1);
-                        spawnMissileFunction();
-                      });
-                      _.if(missileCount.equalTo(maxMissileCount), () => {
-                        kill(self);
-                      });
+          const spawnMissileFunction = MCFunction("misc/missile_tnt/spawn_missile", () => {
+            schedule.function(
+              () => {
+                execute
+                  .as(missileAnchor)
+                  .at(self)
+                  .run(() => {
+                    functionCmd("missile:spawn_missile");
+                    _.if(missileCount.lessThan(5), () => {
+                      missileCount.add(1);
+                      spawnMissileFunction();
                     });
-                },
-                "2s",
-                "append"
-              );
-            }
-          );
+                    _.if(missileCount.equalTo(maxMissileCount), () => {
+                      kill(self);
+                    });
+                  });
+              },
+              "2s",
+              "append"
+            );
+          });
           spawnMissileFunction();
         },
         null,
