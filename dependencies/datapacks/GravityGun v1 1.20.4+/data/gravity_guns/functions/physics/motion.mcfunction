@@ -30,9 +30,9 @@ execute as @s[scores={gravity_power=0},type=!falling_block] store result storage
 execute as @s[scores={gravity_power=1},type=falling_block] store result storage gravity_guns:motion Motion[0] double 0.005 run scoreboard players get @s gravity_motion_x
 execute as @s[scores={gravity_power=1},type=falling_block] store result storage gravity_guns:motion Motion[1] double 0.005 run scoreboard players get @s gravity_motion_y
 execute as @s[scores={gravity_power=1},type=falling_block] store result storage gravity_guns:motion Motion[2] double 0.005 run scoreboard players get @s gravity_motion_z
-execute as @s[scores={gravity_power=1},type=!falling_block] store result storage gravity_guns:motion Motion[0] double 0.030 run scoreboard players get @s gravity_motion_x
-execute as @s[scores={gravity_power=1},type=!falling_block] store result storage gravity_guns:motion Motion[1] double 0.02 run scoreboard players get @s gravity_motion_y
-execute as @s[scores={gravity_power=1},type=!falling_block] store result storage gravity_guns:motion Motion[2] double 0.030 run scoreboard players get @s gravity_motion_z
+execute as @s[scores={gravity_power=1},type=!falling_block] store result storage gravity_guns:motion Motion[0] double 0.013 run scoreboard players get @s gravity_motion_x
+execute as @s[scores={gravity_power=1},type=!falling_block] store result storage gravity_guns:motion Motion[1] double 0.01 run scoreboard players get @s gravity_motion_y
+execute as @s[scores={gravity_power=1},type=!falling_block] store result storage gravity_guns:motion Motion[2] double 0.013 run scoreboard players get @s gravity_motion_z
 # End
 
 execute as @s[scores={gravity_power=2},type=falling_block] store result storage gravity_guns:motion Motion[0] double 0.015 run scoreboard players get @s gravity_motion_x
