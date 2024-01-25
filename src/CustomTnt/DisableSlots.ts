@@ -24,7 +24,7 @@ export const slimeEntity = () => {
 // Summon a slime at the position of TNT's armor stand to disable the slots of the armor stand so that player can't interact with it
 export const spawnSlime = MCFunction("custom_tnt/spawn_slime", () => {
   execute
-    .at(Selector("@e", { type: "armor_stand", tag: ["tnt.as"] }))
+    .at(Selector("@e", { type: "armor_stand", tag: ["tnt.as", "previously_picked"] }))
     .unless(
       Selector("@e", {
         type: "minecraft:slime",
