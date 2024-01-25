@@ -16,6 +16,7 @@ import {
   spawnpoint,
   teleport,
   tellraw,
+  title,
 } from "sandstone";
 import { giveGun } from "../Items/GravityGun";
 import { self } from "../Tick";
@@ -94,6 +95,7 @@ const startGame = MCFunction("game/start_game", () => {
     execute.as(joinedTeam).at(self).run.playsound("minecraft:block.note_block.chime", "master", self, rel(0, 0, 0), 1, 0.8);
 
     tellraw("@a", { text: "Game started", color: "green" });
+    title(joinedTeam).title({ text: "Fight!", color: "red" });
   }).else(() => {
     tellraw("@a", { text: "One or both teams are empty :(", color: "red" });
   });
