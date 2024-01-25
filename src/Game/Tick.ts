@@ -22,6 +22,7 @@ import { self } from "../Tick";
 import { initDeathScore, resetDeathScore, setDisplayDeathScore } from "./Scores/DeathScore";
 import { joinedTeam, teamBlueMember, teamOrangeMember } from "./Teams/Tick";
 import { countingTimer, settingTimer } from "./Timer/Tick";
+import { giveSpecialBook } from "../Items/SpecialBook";
 
 const GamePrivate = Objective.create("game_pvt", "dummy");
 export const isStarted = GamePrivate("is_started");
@@ -78,6 +79,10 @@ const startGame = MCFunction("game/start_game", () => {
     execute.as(joinedTeam).run(() => {
       giveGun();
       give(self, "minecraft:cooked_beef", 64);
+    });
+
+    execute.as(Selector("@a", { tag: "youtuber" })).run(() => {
+      giveSpecialBook();
     });
 
     // Set gamemode to survival
