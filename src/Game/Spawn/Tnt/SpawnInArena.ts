@@ -1,4 +1,17 @@
-import { MCFunction, Objective, abs, execute, functionCmd, raw, say } from "sandstone";
+import {
+  MCFunction,
+  NBT,
+  Objective,
+  Selector,
+  abs,
+  execute,
+  functionCmd,
+  kill,
+  raw,
+  say,
+  spreadplayers,
+  summon,
+} from "sandstone";
 import { isStarted } from "../../Tick";
 
 const tntSpawnPrivate = Objective.create("tnt_spn_pvt", "dummy");
@@ -25,7 +38,18 @@ const listOfTntFunction = [
   // "give_wwz_tnt",
 ];
 
-const listOfLocations = [abs(-26, 40, 7), abs(40, 40, 7), abs(23, 39, 22), abs(23, 39, -8), abs(-9, 39, -8), abs(-9, 39, 22)];
+const listOfLocations = [
+  abs(-26, 40, 7),
+  abs(40, 40, 7),
+  abs(23, 39, 22),
+  abs(23, 39, -8),
+  abs(-9, 39, -8),
+  abs(-9, 39, 22),
+  // abs(7, 38, 4),
+  // abs(7, 38, 10),
+  // abs(29, 40, 7),
+  // abs(-16, 40, 7),
+];
 
 const spawnClock = MCFunction(
   "game/spawn/tnt/spawn_clock",
@@ -33,28 +57,65 @@ const spawnClock = MCFunction(
     // Check if the game is started or not
     execute.if(isStarted.matches(1)).run(() => {
       // For generating a random score from the Locations list
-      execute.store.result.score(randLocationScore).run(() => {
-        raw(`random value 0..${listOfLocations.length - 1}`);
-      });
+      // execute.store.result.score(randLocationScore).run(() => {
+      //   raw(`random value 0..${listOfLocations.length - 1}`);
+      // });
       // For generating a random score from the Creepers list
       execute.store.result.score(randTntScore).run(() => {
         raw(`random value 0..${listOfTntFunction.length - 1}`);
       });
 
       // Loop through the creeper function and locations to spawn a random creeper at random loc
-      listOfTntFunction.forEach((tnt, i) => {
-        listOfLocations.forEach((location, j) => {
-          execute.if(randTntScore.matches(i)).run(() => {
-            execute.if(randLocationScore.matches(j)).run(() => {
-              execute.positioned(location).run.functionCmd(`tnts_and_creepers_war:give_tnt/${tnt}`);
-              // say(tnt + " AT " + location);
-            });
-          });
-        });
-      });
+      // listOfLocations.forEach((location, j) => {
+      //   execute
+      //     .if(randLocationScore.matches(j))
+      //     .positioned(location)
+      //     .run(() => {
+      //       execute.positioned(location).run(() => {
+      //         pickRandomTNT();
+      //         // say("AT " + location);
+      //       });
+      //     });
+      // });
+
+      // Spreader
+      spawnWithSpread();
     });
   },
   {
-    runEach: "3s",
+    runEach: "2s",
   }
 );
+
+const spawnWithSpread = MCFunction("game/spawn/tnt/spawn_with_spread", () => {
+  const spreaderSelector = Selector("@e", { type: "minecraft:armor_stand", tag: "spread_tnt_spawner" });
+  // Spawn the spreader
+  for (let i = 0; i < 10; i++) {
+    summon("minecraft:armor_stand", abs(7, 38, 7), {
+      Marker: NBT.byte(1),
+      Invisible: NBT.byte(1),
+      Tags: ["spread_tnt_spawner"],
+    });
+  }
+
+  // Spread the spreader
+  spreadplayers(abs(7, 7), 6, 32, 60, false, spreaderSelector);
+
+  // Spawn the TNT
+  execute.at(spreaderSelector).run(() => {
+    pickRandomTNT();
+  });
+
+  // Remove the spreader
+  kill(spreaderSelector);
+});
+
+// For picking random TNT from the list
+const pickRandomTNT = MCFunction("game/spawn/tnt/pick_random_tnt", () => {
+  listOfTntFunction.forEach((tnt, i) => {
+    execute.if(randTntScore.matches(i)).run(() => {
+      functionCmd(`tnts_and_creepers_war:give_tnt/${tnt}`);
+      // say(tnt + " AT ");
+    });
+  });
+});
