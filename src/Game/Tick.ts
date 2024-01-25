@@ -112,3 +112,8 @@ export const endGame = MCFunction("game/end_game", () => {
 
   tellraw("@a", { text: "Game ended", color: "red" });
 });
+
+/* command for text display
+summon text_display ~ ~ ~ {billboard:"vertical",alignment:"center",Tags:["instructions"],text:'[{"text":"TNT wars\\n","color":"gold","bold":true},{"text":"1. Select a team otherwise the game won\'t start\\n","color":"white","bold":false},{"text":"2. Click \\"Start\\" sign to start the game\\n","color":"white","bold":false},{"text":"3. You will receive 2 gravity guns (one for lifting mob and another for TNT) \\n","color":"white","bold":false},{"text":"4. Kill each other using creepers and TNTs\\n","color":"white","bold":false},{"text":"5. The person with the lowest score wins","color":"white","bold":false}]'}
+
+*/
