@@ -20,7 +20,7 @@ execute if entity @s[nbt={SelectedItem:{id:"minecraft:warped_fungus_on_a_stick",
 # execute if block ~ ~ ~ #gravity_guns:dragable run function gravity_guns:summon/gravity_block
 # execute if block ~ ~ ~ #gravity_guns:dragable run setblock ~ ~ ~ air
 
-tag @s[tag=gravity_hold_block] add gravity_using
+# tag @s[tag=gravity_hold_block] add gravity_using
 tag @s[tag=gravity_hold_entity] add gravity_using
 
 #===< Assign id >===
