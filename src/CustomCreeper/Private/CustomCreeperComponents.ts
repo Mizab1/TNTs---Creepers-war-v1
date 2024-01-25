@@ -1,11 +1,4 @@
-import {
-  Coordinates,
-  MCFunction,
-  NBT,
-  Selector,
-  execute,
-  summon,
-} from "sandstone";
+import { Coordinates, MCFunction, NBT, Selector, execute, summon } from "sandstone";
 import { self } from "../../Tick";
 
 /**
@@ -26,22 +19,15 @@ const SpawnFileForCustomCreeper = (
   initialFuse: number = 30,
   isDynamic: boolean = false
 ) => {
-  MCFunction(
-    `custom_creeper/spawn/spawn_${name.replace(" ", "_").toLocaleLowerCase()}`,
-    () => {
-      summon("minecraft:creeper", coords, {
-        CustomName: `{"text": "${name}"}`,
-        Tags: [
-          "custom_creeper",
-          tag,
-          isDynamic ? "dynamic_creeper" : "static_creeper",
-        ],
-        ExplosionRadius: NBT.byte(explosionRadius),
-        Fuse: initialFuse,
-        DeathLootTable: "minecraft:bat",
-      });
-    }
-  );
+  MCFunction(`custom_creeper/spawn/spawn_${name.replace(" ", "_").toLocaleLowerCase()}`, () => {
+    summon("minecraft:creeper", coords, {
+      CustomName: `{"text": "${name}"}`,
+      Tags: ["custom_creeper", tag, isDynamic ? "dynamic_creeper" : "static_creeper"],
+      ExplosionRadius: NBT.byte(explosionRadius),
+      Fuse: initialFuse,
+      DeathLootTable: "minecraft:bat",
+    });
+  });
 };
 
 /**
@@ -67,14 +53,7 @@ export const createCustomCreeper = (
   creeperRunEachTickFunction: { (): void } | null
 ) => {
   // Call the spawnFileFunction
-  SpawnFileForCustomCreeper(
-    name,
-    tag,
-    coords,
-    explosionRadius,
-    initialFuse,
-    creeperHandlerFunction ? true : false
-  );
+  SpawnFileForCustomCreeper(name, tag, coords, explosionRadius, initialFuse, creeperHandlerFunction ? true : false);
 
   // Call the function if it is available
   if (creeperHandlerFunction) {
