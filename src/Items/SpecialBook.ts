@@ -2,7 +2,7 @@ import { MCFunction, give } from "sandstone";
 import { i } from "../Utils/Functions";
 import { self } from "../Tick";
 
-const giveSpecialBook = MCFunction("items/book/give_special_book", () => {
+export const giveSpecialBook = MCFunction("items/book/give_special_book", () => {
   give(
     self,
     i("minecraft:written_book", {
