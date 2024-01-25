@@ -25,10 +25,7 @@ import { randFromArray } from "../Utils/Functions";
 const self = Selector("@s");
 
 /* LOAD */
-const creeperFuseObj: ObjectiveInstance<string> = Objective.create(
-  "creeper_fuse_obj",
-  "dummy"
-);
+const creeperFuseObj: ObjectiveInstance<string> = Objective.create("creeper_fuse_obj", "dummy");
 const creeperFuse: Score<string> = creeperFuseObj("@s");
 
 /* TICK */
@@ -46,32 +43,17 @@ MCFunction(
         });
 
         // Detecting if the creeper is ignited and storing its Fuse in a scoreboard
-        execute.if
-          .entity(
-            Selector("@s", { tag: ["!ignited"], nbt: { ignited: NBT.byte(1) } })
-          )
-          .run(() => {
-            tag(self).add("ignited");
-            execute.store.result
-              .score(self, "creeper_fuse_obj")
-              .run.data.get.entity(self, "Fuse");
-          });
+        execute.if.entity(Selector("@s", { tag: ["!ignited"], nbt: { ignited: NBT.byte(1) } })).run(() => {
+          tag(self).add("ignited");
+          execute.store.result.score(self, "creeper_fuse_obj").run.data.get.entity(self, "Fuse");
+        });
         /* END */
 
         // Run the creeper handler every tick and create a creeper file once
         //! This function will create a file regardless of the condition status, but it will run the handler function on only "dynamic" creeper
 
         /* Start creating custom creeper from here */
-        createCustomCreeper(
-          "Instant Creeper",
-          "instant_creeper",
-          rel(0, 0, 0),
-          3,
-          1,
-          1,
-          null,
-          null
-        );
+        createCustomCreeper("Instant Creeper", "instant_creeper", rel(0, 0, 0), 3, 1, 1, null, null);
         createCustomCreeper(
           "Recursive Creeper",
           "recursive_creeper",
@@ -80,14 +62,7 @@ MCFunction(
           30,
           1,
           () => {
-            particle(
-              "minecraft:poof",
-              rel(0, 0, 0),
-              [1, 1, 1],
-              0.2,
-              100,
-              "force"
-            );
+            particle("minecraft:poof", rel(0, 0, 0), [1, 1, 1], 0.2, 100, "force");
             for (let i = 0; i < 6; i++) {
               summon("minecraft:creeper", rel(Math.sin(i), 1.5, Math.cos(i)), {
                 active_effects: [
@@ -112,14 +87,7 @@ MCFunction(
           30,
           1,
           () => {
-            particle(
-              "minecraft:splash",
-              rel(0, 0, 0),
-              [1, 1, 1],
-              0,
-              400,
-              "force"
-            );
+            particle("minecraft:splash", rel(0, 0, 0), [1, 1, 1], 0, 400, "force");
             for (let i = 2; i >= -2; i--) {
               for (let j = 2; j >= -2; j--) {
                 for (let k = -1; k >= -2; k--) {
@@ -143,19 +111,8 @@ MCFunction(
           30,
           1,
           () => {
-            particle(
-              "minecraft:flame",
-              rel(0, 1, 0),
-              [0.5, 0.5, 0.5],
-              0.2,
-              400,
-              "force"
-            );
-            fill(
-              rel(5, 2, 5),
-              rel(-5, -3, -5),
-              "minecraft:fire replace #aestd1:air"
-            );
+            particle("minecraft:flame", rel(0, 1, 0), [0.5, 0.5, 0.5], 0.2, 400, "force");
+            fill(rel(5, 2, 5), rel(-5, -3, -5), "minecraft:fire replace #aestd1:air");
           },
           null
         );
@@ -167,15 +124,7 @@ MCFunction(
           30,
           1,
           () => {
-            particle(
-              "minecraft:block",
-              "minecraft:stone",
-              rel(0, 0, 0),
-              [2, 2, 2],
-              0.2,
-              400,
-              "force"
-            );
+            particle("minecraft:block", "minecraft:stone", rel(0, 0, 0), [2, 2, 2], 0.2, 400, "force");
 
             const stones: string[] = [
               "minecraft:stone",
@@ -207,14 +156,7 @@ MCFunction(
           20,
           1,
           () => {
-            particle(
-              "minecraft:poof",
-              rel(0, 0, 0),
-              [0, 0, 0],
-              0.2,
-              3,
-              "force"
-            );
+            particle("minecraft:poof", rel(0, 0, 0), [0, 0, 0], 0.2, 3, "force");
           },
           () => {
             const nearestPlayerSelector = Selector("@a", {
@@ -231,14 +173,7 @@ MCFunction(
                     teleport(loc(0, 0, -1));
                     tag(self).add("teleported");
 
-                    particle(
-                      "minecraft:portal",
-                      rel(0, 1, 0),
-                      [0.3, 0.3, 0.3],
-                      0.1,
-                      30,
-                      "force"
-                    );
+                    particle("minecraft:portal", rel(0, 1, 0), [0.3, 0.3, 0.3], 0.1, 30, "force");
                   });
 
                 // Remove the tag after some time
