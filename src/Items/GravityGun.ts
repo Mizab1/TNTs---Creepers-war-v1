@@ -23,7 +23,7 @@ export const giveGun = MCFunction("items/gravity_gun/give", () => {
   give(
     self,
     i("minecraft:warped_fungus_on_a_stick", {
-      CustomModelData: 111101,
+      CustomModelData: 111103,
       gravity_guns: "gravity_gun",
       gravity_power: 1,
       mob_gravity_gun: NBT.byte(1),
