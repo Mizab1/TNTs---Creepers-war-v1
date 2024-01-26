@@ -1,9 +1,9 @@
-import { MCFunction, Selector, rel, spreadplayers } from "sandstone";
+import { MCFunction, Selector, abs, spreadplayers } from "sandstone";
 
 // Teleport the living_base within arena, useful for random TNT
 export const teleportWithinArena = MCFunction("game/teleport_within_arena", () => {
   spreadplayers(
-    rel(0, 0),
+    abs(7, 7),
     5,
     20,
     60,
