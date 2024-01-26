@@ -94,7 +94,7 @@ const spawnClock = MCFunction(
 const spawnWithSpread = MCFunction("game/spawn/tnt/spawn_with_spread", () => {
   const spreaderSelector = Selector("@e", { type: "minecraft:armor_stand", tag: "spread_tnt_spawner" });
   // Spawn the spreader
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 5; i++) {
     summon("minecraft:armor_stand", abs(7, 38, 7), {
       Marker: NBT.byte(1),
       Invisible: NBT.byte(1),
