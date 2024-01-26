@@ -108,6 +108,7 @@ export const endGame = MCFunction("game/end_game", () => {
   // Kill all the TNTs and creepers
   kill(Selector("@e", { type: "minecraft:creeper", tag: "custom_creeper" }));
   kill(Selector("@e", { type: "minecraft:item", tag: "custom_tnt_item" }));
+  kill(Selector("@e", { tag: "tnt.spawned_mobs" }));
 
   // Clear the inventory of the player and effects
   clear(joinedTeam);
