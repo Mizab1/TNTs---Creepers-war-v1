@@ -1,4 +1,4 @@
-import { MCFunction, Selector, _, execute, raw, tellraw, title } from "sandstone";
+import { MCFunction, Selector, _, execute, playsound, raw, rel, tellraw, title } from "sandstone";
 import { self } from "../../Tick";
 import { randFromArray, randomIntFromInterval } from "../../Utils/Functions";
 import { deathScore, deathScoreObj, findMinDeathScore, minDeathScore } from "../Scores/DeathScore";
@@ -71,6 +71,9 @@ const greetWinner = MCFunction("game/ending/greet_winner", () => {
       ];
       title("@a").title(message);
       tellraw("@a", message);
+
+      // Play winning sound
+      playsound("minecraft:ui.toast.challenge_complete", "master", "@a", rel(0, 0, 0), 1, 1);
 
       const fireworksList = [
         `Colors:[I;10371112,10205445,3230842,8508626]`,
