@@ -15,13 +15,12 @@ import {
   raw,
   rel,
   schedule,
-  spreadplayers,
   summon,
 } from "sandstone";
+import { teleportWithinArena } from "../Game/TeleportWithinArena";
 import { self } from "../Tick";
 import { randomIntFromInterval } from "../Utils/Functions";
 import { explosionHandler, placeAndCreateFunction } from "./private/SetupGenerics";
-import { teleportWithinArena } from "../Game/TeleportWithinArena";
 
 export const setTntblock = MCFunction("custom_tnt/setblock", () => {
   execute

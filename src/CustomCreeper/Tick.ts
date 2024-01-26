@@ -6,22 +6,20 @@ import {
   Score,
   Selector,
   _,
-  abs,
   execute,
   fill,
   kill,
   loc,
   particle,
   rel,
-  say,
   schedule,
   setblock,
   summon,
   tag,
   teleport,
 } from "sandstone";
-import { createCustomCreeper } from "./Private/CustomCreeperComponents";
 import { randFromArray } from "../Utils/Functions";
+import { createCustomCreeper } from "./Private/CustomCreeperComponents";
 
 const self = Selector("@s");
 

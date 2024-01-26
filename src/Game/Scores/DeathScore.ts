@@ -1,4 +1,4 @@
-import { MCFunction, Objective, Selector, _, execute, scoreboard } from "sandstone";
+import { MCFunction, Objective, execute, scoreboard } from "sandstone";
 import { joinedTeam } from "../Teams/Tick";
 
 // ! Will automatically increment as the player dies

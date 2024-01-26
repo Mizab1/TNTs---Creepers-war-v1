@@ -1,8 +1,8 @@
 import { Coordinates, MCFunction, NBT, Objective, _, abs, execute, playsound, scoreboard, setblock, title } from "sandstone";
-import { b } from "../../Utils/Functions";
-import { bossbarTimerName, isStarted } from "../Tick";
-import { joinedTeam } from "../Teams/Tick";
 import { self } from "../../Tick";
+import { b } from "../../Utils/Functions";
+import { joinedTeam } from "../Teams/Tick";
+import { bossbarTimerName, isStarted } from "../Tick";
 
 // User Defined Functions
 const setTimeSign = (coord: Coordinates) => {

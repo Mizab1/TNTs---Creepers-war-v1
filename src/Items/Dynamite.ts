@@ -6,12 +6,9 @@ import {
   Selector,
   _,
   execute,
-  fill,
   give,
   kill,
   particle,
-  playsound,
-  raw,
   rel,
   summon,
 } from "sandstone";
@@ -96,22 +93,8 @@ export const hitGround = MCFunction("items/dynamite/hit_ground", () => {
           for (let j = -0.5; j <= 0.5; j += 0.5) {
             for (let k = -0.5; k <= 0.5; k += 0.5) {
               _.if(_.not(_.block(rel(i, j, k), "air")), () => {
-                particle(
-                  "minecraft:explosion",
-                  rel(0, 0, 0),
-                  [0.1, 0.1, 0.1],
-                  0,
-                  4,
-                  "force"
-                );
-                particle(
-                  "minecraft:cloud",
-                  rel(0, 0, 0),
-                  [0.1, 0.1, 0.1],
-                  0.2,
-                  20,
-                  "force"
-                );
+                particle("minecraft:explosion", rel(0, 0, 0), [0.1, 0.1, 0.1], 0, 4, "force");
+                particle("minecraft:cloud", rel(0, 0, 0), [0.1, 0.1, 0.1], 0.2, 20, "force");
 
                 summon("minecraft:creeper", rel(0, 0, 0), {
                   Fuse: 0,

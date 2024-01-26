@@ -9,7 +9,6 @@ import {
   kill,
   raw,
   rel,
-  say,
   spreadplayers,
   summon,
 } from "sandstone";

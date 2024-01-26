@@ -1,4 +1,4 @@
-import { MCFunction, Objective, abs, execute, raw, say } from "sandstone";
+import { MCFunction, Objective, abs, execute, raw } from "sandstone";
 import { isStarted } from "../../Tick";
 
 const creeperSpawnPrivate = Objective.create("cpr_spn_pvt", "dummy");

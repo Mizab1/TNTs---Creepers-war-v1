@@ -1,10 +1,10 @@
-import { MCFunction, Selector, _, execute, playsound, raw, rel, tellraw, title } from "sandstone";
+import { MCFunction, _, execute, playsound, raw, rel, tellraw, title } from "sandstone";
 import { self } from "../../Tick";
 import { randFromArray, randomIntFromInterval } from "../../Utils/Functions";
 import { deathScore, deathScoreObj, findMinDeathScore, minDeathScore } from "../Scores/DeathScore";
+import { joinedTeam } from "../Teams/Tick";
 import { endGame } from "../Tick";
 import { countingTimer } from "../Timer/Tick";
-import { joinedTeam } from "../Teams/Tick";
 
 const tick = MCFunction(
   "game/ending/tick",

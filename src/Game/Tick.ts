@@ -11,7 +11,6 @@ import {
   gamemode,
   give,
   kill,
-  playsound,
   rel,
   spawnpoint,
   teleport,
@@ -19,11 +18,11 @@ import {
   title,
 } from "sandstone";
 import { giveGun } from "../Items/GravityGun";
+import { giveSpecialBook } from "../Items/SpecialBook";
 import { self } from "../Tick";
 import { initDeathScore, resetDeathScore, setDisplayDeathScore } from "./Scores/DeathScore";
 import { joinedTeam, teamBlueMember, teamOrangeMember } from "./Teams/Tick";
 import { countingTimer, settingTimer } from "./Timer/Tick";
-import { giveSpecialBook } from "../Items/SpecialBook";
 
 const GamePrivate = Objective.create("game_pvt", "dummy");
 export const isStarted = GamePrivate("is_started");
