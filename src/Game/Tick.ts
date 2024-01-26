@@ -66,12 +66,12 @@ const startGame = MCFunction("game/start_game", () => {
     // Teleport the players to their respective spots and set the spawnpoint
     execute.as(teamOrangeMember).run(() => {
       const startingCoords = abs(7, 39, 38);
-      teleport(self, startingCoords);
+      teleport(self, startingCoords, abs(180, 0));
       spawnpoint(self, startingCoords);
     });
     execute.as(teamBlueMember).run(() => {
       const startingCoords = abs(7, 39, -24);
-      teleport(self, startingCoords);
+      teleport(self, startingCoords, abs(0, 0));
       spawnpoint(self, startingCoords);
     });
 
