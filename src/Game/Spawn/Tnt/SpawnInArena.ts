@@ -8,6 +8,7 @@ import {
   functionCmd,
   kill,
   raw,
+  rel,
   say,
   spreadplayers,
   summon,
@@ -36,6 +37,10 @@ const listOfTntFunction = [
   // "give_warden",
   // "give_wither_tnt",
   // "give_wwz_tnt",
+  "minecraft:strong_strength",
+  "minecraft:healing",
+  "minecraft:fire_resistance",
+  "minecraft:swiftness",
 ];
 
 const listOfLocations = [
@@ -114,7 +119,14 @@ const spawnWithSpread = MCFunction("game/spawn/tnt/spawn_with_spread", () => {
 const pickRandomTNT = MCFunction("game/spawn/tnt/pick_random_tnt", () => {
   listOfTntFunction.forEach((tnt, i) => {
     execute.if(randTntScore.matches(i)).run(() => {
-      functionCmd(`tnts_and_creepers_war:give_tnt/${tnt}`);
+      if (tnt.includes("give")) {
+        functionCmd(`tnts_and_creepers_war:give_tnt/${tnt}`);
+      } else {
+        // summon item ~ ~ ~ {Item:{id:"minecraft:splash_potion",Count:1b,tag:{Potion:"minecraft:strong_strength"}}}
+        summon("minecraft:item", rel(0, 0, 0), {
+          Item: { id: "minecraft:splash_potion", Count: NBT.byte(1), tag: { Potion: tnt } },
+        });
+      }
       // say(tnt + " AT ");
     });
   });
