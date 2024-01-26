@@ -74,6 +74,7 @@ MCFunction(
             particle("minecraft:poof", rel(0, 0, 0), [1, 1, 1], 0.2, 100, "force");
             for (let i = 0; i < 6; i++) {
               summon("minecraft:creeper", rel(Math.sin(i), 1.5, Math.cos(i)), {
+                Tags: ["custom_creeper"],
                 active_effects: [
                   {
                     id: "minecraft:resistance",

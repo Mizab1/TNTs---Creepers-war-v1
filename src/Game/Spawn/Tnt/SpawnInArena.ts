@@ -123,6 +123,7 @@ const pickRandomTNT = MCFunction("game/spawn/tnt/pick_random_tnt", () => {
       } else {
         // summon item ~ ~ ~ {Item:{id:"minecraft:splash_potion",Count:1b,tag:{Potion:"minecraft:strong_strength"}}}
         summon("minecraft:item", rel(0, 0, 0), {
+          Tags: ["custom_tnt_item"],
           Item: { id: "minecraft:splash_potion", Count: NBT.byte(1), tag: { Potion: tnt } },
         });
       }
