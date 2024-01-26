@@ -65,7 +65,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         () => {
           for (let i = 0; i < 2; i++) {
             summon("minecraft:creeper", rel(0, 0, 0), {
-              Tags: ["tnt.creeper"],
+              Tags: ["tnt.creeper", "tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -74,7 +74,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               ExplosionRadius: NBT.byte(2),
             });
             summon("minecraft:skeleton", rel(0, 0, 0), {
-              Tags: ["tnt.skeleton"],
+              Tags: ["tnt.skeleton", "tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -83,7 +83,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               HandItems: [{ id: "minecraft:bow", Count: NBT.byte(1) }, {}],
             });
             summon("minecraft:blaze", rel(0, 0, 0), {
-              Tags: ["tnt.blaze"],
+              Tags: ["tnt.blaze", "tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -91,7 +91,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               ],
             });
             summon("minecraft:enderman", rel(0, 0, 0), {
-              Tags: ["tnt.enderman"],
+              Tags: ["tnt.enderman", "tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -99,7 +99,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               ],
             });
             summon("minecraft:stray", rel(0, 0, 0), {
-              Tags: ["tnt.stray"],
+              Tags: ["tnt.stray", "tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -108,7 +108,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
               HandItems: [{ id: "minecraft:bow", Count: NBT.byte(1) }, {}],
             });
             summon("minecraft:husk", rel(0, 0, 0), {
-              Tags: ["tnt.husk"],
+              Tags: ["tnt.husk", "tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -176,6 +176,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         },
         () => {
           summon("minecraft:warden", rel(0, 0, 0), {
+            Tags: ["tnt.spawned_mobs"],
             Brain: {
               memories: {
                 '"minecraft:dig_cooldown"': { ttl: NBT.long(1200), value: {} },
@@ -198,6 +199,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           gamerule("universalAnger", true);
           for (let i = 0; i < 20; i++) {
             summon("minecraft:bee", rel(0, 0, 0), {
+              Tags: ["tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -239,6 +241,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         () => {
           for (let i = 0; i < 5; i++) {
             summon("minecraft:creeper", rel(0, 0, 0), {
+              Tags: ["tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -250,6 +253,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           }
           for (let i = 0; i < 2; i++) {
             summon("minecraft:creeper", rel(0, 0, 0), {
+              Tags: ["tnt.spawned_mobs"],
               Motion: [
                 +lodash.random(0.2, 0.9, true).toFixed(1),
                 +lodash.random(0.2, 0.9, true).toFixed(1),
@@ -505,7 +509,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         },
         () => {
           summon("minecraft:wither", rel(0, 0, 0), {
-            Tags: ["tnt_wither"],
+            Tags: ["tnt_wither", "tnt.spawned_mobs"],
             DeathLootTable: "minecraft:bat",
           });
 
@@ -561,7 +565,7 @@ export const handler = MCFunction("custom_tnt/handler", () => {
           for (let i = 0; i < 4; i++) {
             summon("minecraft:zombie", rel(0, 0, 0), {
               DeathLootTable: "minecraft:bat",
-              Tags: ["tnt_mutant_zombie"],
+              Tags: ["tnt_mutant_zombie", "tnt.spawned_mobs"],
               Health: NBT.float(30),
               Attributes: [
                 { Name: "generic.max_health", Base: 30 },
