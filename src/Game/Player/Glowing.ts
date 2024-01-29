@@ -10,7 +10,7 @@ const giveGlow = MCFunction("game/player/give_glow", () => {
 const glowCounter = MCFunction(
   "game/player/glow_counter",
   () => {
-    _.if(countingTimer.moduloBy(30).equalTo(0), () => {
+    _.if(countingTimer.moduloBy(20).equalTo(0), () => {
       giveGlow();
     });
   },
