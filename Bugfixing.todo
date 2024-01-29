@@ -41,3 +41,7 @@ test1:
   ✔ Add more particles
   ✔ debug counter
   ✔ Add break (br)
+
+  ✔ Added Timer
+  ✔ Added spawnpoint
+  ✔ Removed Helmet
