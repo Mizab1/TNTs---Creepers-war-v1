@@ -87,7 +87,7 @@ const spawnClock = MCFunction(
     });
   },
   {
-    runEach: "2s",
+    runEach: "5s",
   }
 );
 
