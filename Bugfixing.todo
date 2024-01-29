@@ -28,11 +28,11 @@ test1:
   ✔ the timer have tobe in minutes +1 minute nor 10 seconds
   ☐ give armor to the players maybe futuristic textures, you can search in pmc
   ✔ what about the reset arena? you should to clone it after each game
-  ☐ add particles maybe end rod particles when the tnt appears 
-  ☐ too much items in the game, reduce the spawning
-  ☐ automatic tp to the hub after the fight
+  ✔ add particles maybe end rod particles when the tnt appears (Test)
+  ✔ too much items in the game, reduce the spawning (Test)
+  ✔ automatic tp to the hub after the fight
   ✔ range of selecting creepers is too long
   ✔ water
-  ☐ tie is available incase?
-  ☐ Change color of the team joined text
+  ✔ tie is available incase?
+  ✔ Change color of the team joined text
   ☐ Add glowing effect to the player

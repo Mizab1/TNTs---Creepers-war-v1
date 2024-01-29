@@ -36,7 +36,7 @@ const joinBlue = MCFunction("game/teams/join_blue", () => {
 
     tellraw(self, [
       { text: "You joined team ", color: "white" },
-      { text: "Blue", color: "green" },
+      { text: "Blue", color: "blue" },
     ]);
 
     playsound("minecraft:block.note_block.bell", "master", self, rel(0, 0, 0), 1, 1.4);
