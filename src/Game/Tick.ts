@@ -129,8 +129,10 @@ export const endGame = MCFunction("game/end_game", () => {
   // Async function
   schedule.function(
     () => {
+      const hubCoords = abs(7, 54, -30);
       // Teleport player to the hub
-      teleport(joinedTeam, abs(7, 54, -30), abs(0, 0));
+      teleport(joinedTeam, hubCoords, abs(0, 0));
+      spawnpoint(joinedTeam, hubCoords);
     },
     "60t",
     "replace"
