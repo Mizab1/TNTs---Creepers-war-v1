@@ -1,4 +1,17 @@
-import { Coordinates, MCFunction, NBT, Objective, _, abs, execute, playsound, scoreboard, setblock, title } from "sandstone";
+import {
+  Coordinates,
+  MCFunction,
+  NBT,
+  Objective,
+  _,
+  abs,
+  bossbar,
+  execute,
+  playsound,
+  scoreboard,
+  setblock,
+  title,
+} from "sandstone";
 import { self } from "../../Tick";
 import { b } from "../../Utils/Functions";
 import { joinedTeam } from "../Teams/Tick";
@@ -72,6 +85,11 @@ const timerCountdown = MCFunction(
         execute.store.result.bossbar(bossbarTimerName, "value").run(() => {
           scoreboard.players.get(countingTimer.target, countingTimer.objective.name);
         });
+        bossbar
+          .set(bossbarTimerName)
+          .name(
+            `{"text":"Timer - ","extra":[{"score":{"name":"${countingTimer.target}","objective":"${countingTimer.objective.name}"}},{"text":" seconds remaining"}]}`
+          );
       });
 
       _.if(countingTimer.matches([1, 3]), () => {
