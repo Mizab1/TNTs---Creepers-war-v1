@@ -12,6 +12,7 @@ import {
   give,
   kill,
   rel,
+  schedule,
   spawnpoint,
   teleport,
   tellraw,
@@ -119,8 +120,15 @@ export const endGame = MCFunction("game/end_game", () => {
 
   tellraw("@a", { text: "Game ended", color: "red" });
 
-  // Teleport player to the hub
-  teleport(joinedTeam, abs(7, 54, -30), abs(0, 0));
+  // Async function
+  schedule.function(
+    () => {
+      // Teleport player to the hub
+      teleport(joinedTeam, abs(7, 54, -30), abs(0, 0));
+    },
+    "60t",
+    "replace"
+  );
 });
 
 /* command for text display
