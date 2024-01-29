@@ -4,7 +4,7 @@ import { i } from "../../Utils/Functions";
 
 export const addArmor = MCFunction("game/player/add_armor", () => {
   // @ts-ignore
-  item.replace.entity(self, "armor.head").with(i("minecraft:iron_helmet", { display: { Name: '{"text":"Special Armor"}' } }), 1);
+  // item.replace.entity(self, "armor.head").with(i("minecraft:iron_helmet", { display: { Name: '{"text":"Special Armor"}' } }), 1);
 
   item.replace
     .entity(self, "armor.chest")
