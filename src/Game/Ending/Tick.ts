@@ -13,8 +13,14 @@ const tick = MCFunction(
       // Initialize the endgame sequence
       endGame();
 
+      // Add break
+      br();
+
       // Display the death scores of the players
       displayScore();
+
+      // Add break
+      br();
 
       // Decide who won
       greetWinner();
@@ -37,6 +43,10 @@ const displayScore = () => {
       { text: " time(s)", color: "white" },
     ]);
   });
+};
+
+const br = () => {
+  tellraw("@a", { text: "==========================", color: "gray" });
 };
 
 const greetWinner = MCFunction("game/ending/greet_winner", () => {
