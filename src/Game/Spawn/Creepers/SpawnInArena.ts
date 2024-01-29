@@ -44,6 +44,6 @@ const spawnClock = MCFunction(
     });
   },
   {
-    runEach: "30t",
+    runEach: "40t",
   }
 );
