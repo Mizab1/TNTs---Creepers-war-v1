@@ -85,3 +85,7 @@ const timerCountdown = MCFunction(
     runEach: "20t",
   }
 );
+
+const debugTimer = MCFunction("game/timer/debug_timer", () => {
+  settingTimer.set(10);
+});
