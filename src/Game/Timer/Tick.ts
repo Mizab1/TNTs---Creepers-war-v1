@@ -24,18 +24,18 @@ const setTimeSign = (coord: Coordinates) => {
   );
 };
 
-//! Time is in 10 Seconds format
+//! Time is in 60 Secs format
 const timerPrivate = Objective.create("timer_pvt", "dummy");
 export const settingTimer = timerPrivate("setting_timer");
 export const countingTimer = timerPrivate("counting_timer");
 
-export const timerInterval: number = 10;
+export const timerInterval: number = 60;
 
 // These are generics function like increasing and decreasing
 
 const increaseTimer = MCFunction("game/timer/increase_timer", () => {
   // This command is used to obtain the timer sign
-  // give @p warped_sign{BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true},{"text":"Increase ","color":"green"},{"text":"]"}]','{"text":""}','{"text":"+10 Secs","color":"blue","clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/timer/increase_timer"}}']}}} 1
+  // give @p warped_sign{BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true},{"text":"Increase ","color":"green"},{"text":"]"}]','{"text":""}','{"text":"+60 Secs","color":"blue","clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/timer/increase_timer"}}']}}} 1
   settingTimer.add(timerInterval);
 
   // Display the time
@@ -46,7 +46,7 @@ const increaseTimer = MCFunction("game/timer/increase_timer", () => {
 
 const decreaseTimer = MCFunction("game/timer/decrease_timer", () => {
   // This command is used to obtain the timer sign
-  // give @p warped_sign{BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true},{"text":"Decrease ","color":"green"},{"text":"]"}]','{"text":""}','{"text":"-10 Secs","color":"red","clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/timer/decrease_timer"}}']}}} 1
+  // give @p warped_sign{BlockEntityTag:{front_text:{messages:['{"text":""}','[{"text":"[ ","color":"gray","bold":true},{"text":"Decrease ","color":"green"},{"text":"]"}]','{"text":""}','{"text":"-60 Secs","color":"red","clickEvent":{"action":"run_command","value":"/function tnts_and_creepers_war:game/timer/decrease_timer"}}']}}} 1
   _.if(settingTimer.greaterThan(timerInterval), () => {
     settingTimer.remove(timerInterval);
 
