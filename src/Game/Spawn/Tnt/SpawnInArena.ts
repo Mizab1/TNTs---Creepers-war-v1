@@ -7,6 +7,7 @@ import {
   execute,
   functionCmd,
   kill,
+  particle,
   raw,
   rel,
   spreadplayers,
@@ -108,6 +109,7 @@ const spawnWithSpread = MCFunction("game/spawn/tnt/spawn_with_spread", () => {
   // Spawn the TNT
   execute.at(spreaderSelector).run(() => {
     pickRandomTNT();
+    particle("minecraft:end_rod", rel(0, 0, 0), [0, 0, 0], 0.05, 5, "force");
   });
 
   // Remove the spreader
