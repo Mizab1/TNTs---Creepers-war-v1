@@ -19,13 +19,8 @@ function addDatapacks(worldName) {
 
     try {
       // Use the "robocopy" command to copy the subdirectory
-      execSync(
-        `robocopy "${sourceSubdirectory}" "${destinationSubdirectory}" /s /e /mir /nfl /ndl`,
-        { stdio: "inherit" }
-      );
-      console.log(
-        `Copied: ${sourceSubdirectory} to ${destinationSubdirectory}`
-      );
+      execSync(`robocopy "${sourceSubdirectory}" "${destinationSubdirectory}" /s /e /mir /nfl /ndl`, { stdio: "inherit" });
+      console.log(`Copied: ${sourceSubdirectory} to ${destinationSubdirectory}`);
     } catch (error) {
       // console.error(`Error copying ${sourceSubdirectory}: ${error.message}`);
     }
@@ -48,13 +43,8 @@ function addResources(worldName) {
 
     try {
       // Use the "robocopy" command to copy the subdirectory
-      execSync(
-        `robocopy "${sourceSubdirectory}" "${destinationSubdirectory}" /s /e /mir /nfl /ndl`,
-        { stdio: "inherit" }
-      );
-      console.log(
-        `Copied: ${sourceSubdirectory} to ${destinationSubdirectory}`
-      );
+      execSync(`robocopy "${sourceSubdirectory}" "${destinationSubdirectory}" /s /e /mir /nfl /ndl`, { stdio: "inherit" });
+      console.log(`Copied: ${sourceSubdirectory} to ${destinationSubdirectory}`);
     } catch (error) {
       // console.error(`Error copying ${sourceSubdirectory}: ${error.message}`);
     }
