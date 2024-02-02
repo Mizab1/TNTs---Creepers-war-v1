@@ -105,5 +105,5 @@ const timerCountdown = MCFunction(
 );
 
 const debugTimer = MCFunction("game/timer/debug_timer", () => {
-  settingTimer.set(10);
+  settingTimer.set(30);
 });
