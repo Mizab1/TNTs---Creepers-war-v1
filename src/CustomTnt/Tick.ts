@@ -151,9 +151,10 @@ export const handler = MCFunction("custom_tnt/handler", () => {
         "tnt.nuclear",
         100,
         () => {
-          particle("minecraft:crimson_spore", rel(0, 0.8, 0), [0, 0, 0], 0, 20, "force");
+          particle("minecraft:crimson_spore", rel(0, 0.8, 0), [0, 0, 0], 0, 10, "force");
           particle("minecraft:soul_fire_flame", rel(0, 0.8, 0), [0, 0, 0], 0.1, 5, "force");
-          raw(`particle angry_villager ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
+          // raw(`particle angry_villager ~ ~1 ~ 0.5 0.5 0.5 1 1 force`);
+          particle("minecraft:lava", rel(0, 0, 0), [0, 0, 0], 0.1, 15, "force");
         },
         () => {
           summon("minecraft:creeper", rel(0, 0, 0), {
@@ -284,6 +285,8 @@ export const handler = MCFunction("custom_tnt/handler", () => {
             );
           }
           particle("minecraft:ash", rel(0, 0.8, 0), [0.1, 0.5, 0.1], 0.1, 50, "force");
+          particle("minecraft:flame", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.1, 5, "force");
+          particle("minecraft:campfire_cosy_smoke", rel(0, 0.8, 0), [0.1, 0.1, 0.1], 0.05, 1, "force");
         },
         () => {
           raw(
