@@ -30,7 +30,7 @@ const placeTnt = (tag: string, customModelData: number) => {
     summon("minecraft:armor_stand", rel(0, 0, 0), {
       NoGravity: NBT.byte(1),
       Invisible: NBT.byte(1),
-      Tags: [`tnt.${tag}`, `tnt.as`],
+      Tags: [`tnt.${tag}`, `tnt.as`, `gravity_exclude`],
       ArmorItems: [
         {},
         {},
@@ -56,12 +56,7 @@ const placeTnt = (tag: string, customModelData: number) => {
  * @param {string} tag - The tag associated with the TNT item.
  * @param {number} customModelData - The custom model data for the TNT item.
  */
-const createGiveFunction = (
-  nameOfTheGiveFunction: string,
-  nameOfTheTnt: string,
-  tag: string,
-  customModelData: number
-) => {
+const createGiveFunction = (nameOfTheGiveFunction: string, nameOfTheTnt: string, tag: string, customModelData: number) => {
   MCFunction("give_tnt/" + nameOfTheGiveFunction, () => {
     const isItem: boolean = true;
     // ! Switch between give and summon commands
@@ -184,21 +179,9 @@ export const explosionHandler = (
       runEachTick ? runEachTick() : "";
 
       _.if(fuseTime.matches(0), () => {
-        particle(
-          "minecraft:explosion",
-          rel(0, 1, 0),
-          [1, 1, 1],
-          1,
-          30,
-          "force"
-        );
+        particle("minecraft:explosion", rel(0, 1, 0), [1, 1, 1], 1, 30, "force");
         particle("minecraft:cloud", rel(0, 1, 0), [1, 0.1, 1], 1, 20, "force");
-        playsound(
-          "minecraft:entity.generic.explode",
-          "master",
-          "@a",
-          rel(0, 1, 0)
-        );
+        playsound("minecraft:entity.generic.explode", "master", "@a", rel(0, 1, 0));
         eventOnExplosion();
         kill(self);
       });
