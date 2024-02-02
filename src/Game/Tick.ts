@@ -24,7 +24,7 @@ import { self } from "../Tick";
 import { initDeathScore, resetDeathScore, setDisplayDeathScore } from "./Scores/DeathScore";
 import { joinedTeam, teamBlueMember, teamOrangeMember } from "./Teams/Tick";
 import { countingTimer, settingTimer } from "./Timer/Tick";
-import { addArmor } from "./Player/Tick";
+import { addBlueArmors, addOrangeArmors } from "./Player/Tick";
 
 const GamePrivate = Objective.create("game_pvt", "dummy");
 export const isStarted = GamePrivate("is_started");
@@ -96,8 +96,11 @@ const startGame = MCFunction("game/start_game", () => {
     execute.as(joinedTeam).at(self).run.playsound("minecraft:block.note_block.chime", "master", self, rel(0, 0, 0), 1, 0.8);
 
     // Give armor to the player
-    execute.as(joinedTeam).run(() => {
-      addArmor();
+    execute.as(teamOrangeMember).run(() => {
+      addOrangeArmors();
+    });
+    execute.as(teamBlueMember).run(() => {
+      addBlueArmors();
     });
 
     tellraw("@a", { text: "Game started", color: "green" });
