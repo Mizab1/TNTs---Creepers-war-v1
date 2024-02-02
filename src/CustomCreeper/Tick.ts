@@ -174,7 +174,7 @@ MCFunction(
             });
             execute.if
               .entity(nearestPlayerSelector)
-              .if.entity(Selector("@s", { tag: "!teleported" }))
+              .if.entity(Selector("@s", { tag: ["!teleported", "!picked_up_creeper"] }))
               .run(() => {
                 execute
                   .at(nearestPlayerSelector)
