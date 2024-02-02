@@ -7,7 +7,7 @@ import { self } from "../Tick";
 export const slimeEntity = () => {
   summon("minecraft:slime", rel(0, 0, 0), {
     NoGravity: NBT.byte(1),
-    Tags: ["tnt.slime"],
+    Tags: ["tnt.slime", "gravity_exclude"],
     Size: 3,
     NoAI: NBT.byte(1),
     ActiveEffects: [
