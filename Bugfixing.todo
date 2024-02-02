@@ -45,3 +45,9 @@ test1:
   ✔ Added Timer
   ✔ Added spawnpoint
   ✔ Removed Helmet
+
+  ✔ sometimes we just tp back to our spawnpoint without die
+  ✔ and when you use the entity gun in a tnt you remove the custom tnt i guess that is about the armor stand or a slime
+  ✔ also the armor is the same color, it should to be different colors
+  ✔ apparently there is a bug wioth the creepers sometimes you pick them and tp at your back 
+  ✔ add more particles to the meteor and nuke
